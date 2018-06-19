@@ -985,8 +985,8 @@ _iqk_rx_iqk_by_path_8822b(
 		gonext = false;
 		while (1) {
 			KFAIL = _iqk_rx_iqk_gain_search_fail_8822b(p_dm_odm, path, RXIQK1);
-			if (KFAIL && (p_iqk_info->gs_retry_count[0][path][RXIQK1] < 2))
-				p_iqk_info->gs_retry_count[0][path][RXIQK1]++;
+			if (KFAIL && (p_iqk_info->gs_retry_count[0][path][GSRXK1] < 2))
+				p_iqk_info->gs_retry_count[0][path][GSRXK1]++;
 			else if (KFAIL) {
 				p_iqk_info->RXIQK_fail_code[0][path] = 0;
 				p_iqk_info->rxiqk_step = 5;
@@ -1004,8 +1004,8 @@ _iqk_rx_iqk_by_path_8822b(
 		p_iqk_info->isbnd = false;
 		while (1) {
 			KFAIL = _iqk_rx_iqk_gain_search_fail_8822b(p_dm_odm, path, RXIQK2);
-			if (KFAIL && (p_iqk_info->gs_retry_count[0][path][RXIQK2] < rxiqk_gs_limit))
-				p_iqk_info->gs_retry_count[0][path][RXIQK2]++;
+			if (KFAIL && (p_iqk_info->gs_retry_count[0][path][GSRXK2] < rxiqk_gs_limit))
+				p_iqk_info->gs_retry_count[0][path][GSRXK2]++;
 			else {
 				p_iqk_info->rxiqk_step++;
 				break;
@@ -1171,8 +1171,8 @@ _iqk_iqk_by_path_8822b(
 			p_iqk_info->retry_count[0][ODM_RF_PATH_B][RXIQK1], p_iqk_info->retry_count[0][ODM_RF_PATH_B][RXIQK2]));
 		ODM_RT_TRACE(p_dm_odm, ODM_COMP_CALIBRATION, ODM_DBG_LOUD,
 			("[IQK]PathA_GS1_retry = %d, PathA_GS2_retry = %d, PathB_GS1_retry = %d, PathB_GS2_retry = %d\n",
-			p_iqk_info->gs_retry_count[0][ODM_RF_PATH_A][RXIQK1], p_iqk_info->gs_retry_count[0][ODM_RF_PATH_A][RXIQK2],
-			p_iqk_info->gs_retry_count[0][ODM_RF_PATH_B][RXIQK1], p_iqk_info->gs_retry_count[0][ODM_RF_PATH_B][RXIQK2]));
+			p_iqk_info->gs_retry_count[0][ODM_RF_PATH_A][GSRXK1], p_iqk_info->gs_retry_count[0][ODM_RF_PATH_A][GSRXK2],
+			p_iqk_info->gs_retry_count[0][ODM_RF_PATH_B][GSRXK1], p_iqk_info->gs_retry_count[0][ODM_RF_PATH_B][GSRXK2]));
 		for (i = 0; i < 2; i++) {
 			odm_write_4byte(p_dm_odm, 0x1b00, 0xf8000008 | i << 1);
 			odm_write_4byte(p_dm_odm, 0x1b2c, 0x7);
