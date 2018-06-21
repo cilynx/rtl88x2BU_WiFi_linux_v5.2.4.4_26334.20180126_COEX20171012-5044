@@ -150,7 +150,7 @@ int usbctrl_vendorreq(struct intf_hdl *pintfhdl, u8 request, u16 value, u16 inde
 
 #if (defined(CONFIG_RTL8822B) || defined(CONFIG_RTL8821C))
 	if (value < 0xFE00) {
-		if (0x00 <= value && value <= 0xff)
+		if (value <= 0xff)
 			current_reg_sec = REG_ON_SEC;
 		else if (0x1000 <= value && value <= 0x10ff)
 			current_reg_sec = REG_ON_SEC;

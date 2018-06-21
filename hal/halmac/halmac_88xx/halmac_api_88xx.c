@@ -1258,7 +1258,7 @@ halmac_init_mac_cfg_88xx(
 /**
  * halmac_cfg_operation_mode_88xx() - config operation mode
  * @pHalmac_adapter : the adapter of halmac
- * @wireless_mode : 802.11 standard(b/g/n/ac¡K)
+ * @wireless_mode : 802.11 standard(b/g/n/acï¿½K)
  * Author : KaiYuan Chang/Ivan Lin
  * Return : HALMAC_RET_STATUS
  * More details of status code can be found in prototype document
@@ -3048,8 +3048,10 @@ halmac_cfg_txbf_88xx(
 		switch (bw) {
 		case HALMAC_BW_80:
 			temp42C |= BIT_R_TXBF0_80M;
+			/* fall through */
 		case HALMAC_BW_40:
 			temp42C |= BIT_R_TXBF0_40M;
+			/* fall through */
 		case HALMAC_BW_20:
 			temp42C |= BIT_R_TXBF0_20M;
 			break;

@@ -383,7 +383,7 @@ _iqk_backup_iqk_8822b(
 			p_iqk_info->LOK_IDAC[0][path] = odm_get_rf_reg(p_dm_odm, (enum odm_rf_radio_path_e)path, 0x58, RFREGOFFSETMASK);
 		break;
 	case 2:	/*TXIQK backup*/
-	case 3: /*RXIQK backup*/	
+	case 3: /*RXIQK backup*/
 		phydm_set_iqk_cfir(p_dm_odm, p_iqk_info, (step-2), path);
 		break;
 	}
@@ -422,9 +422,9 @@ _iqk_reload_iqk_setting_8822b(
 				odm_write_4byte(p_dm_odm, 0x1bd8, ((0xc0000000 >> idx) + 0x1) + (i * 4) + (p_iqk_info->IQK_CFIR_imag[channel][path][idx][i] << 9));
 			}
 			if (idx == 0)
-				odm_set_bb_reg(p_dm_odm, iqk_apply[path], BIT(0), ~(p_iqk_info->IQK_fail_report[channel][path][idx]));
+				odm_set_bb_reg(p_dm_odm, iqk_apply[path], BIT(0), !(p_iqk_info->IQK_fail_report[channel][path][idx]));
 			else
-				odm_set_bb_reg(p_dm_odm, iqk_apply[path], BIT(10), ~(p_iqk_info->IQK_fail_report[channel][path][idx]));
+				odm_set_bb_reg(p_dm_odm, iqk_apply[path], BIT(10), !(p_iqk_info->IQK_fail_report[channel][path][idx]));
 		}
 		odm_set_bb_reg(p_dm_odm, 0x1bd8, MASKDWORD, 0x0);
 		odm_set_bb_reg(p_dm_odm, 0x1b0c, BIT(13) | BIT(12), 0x0);
@@ -540,7 +540,7 @@ _iqk_configure_macbb_8822b(
 	odm_set_bb_reg(p_dm_odm, 0x550, BIT(11) | BIT(3), 0x0);
 	odm_set_bb_reg(p_dm_odm, 0x90c, BIT(15), 0x1);			/*0x90c[15]=1: dac_buf reset selection*/
 	odm_set_bb_reg(p_dm_odm, 0x9a4, BIT(31), 0x0);         /*0x9a4[31]=0: Select da clock*/
-	/*0xc94[0]=1, 0xe94[0]=1: Åýtx±qiqk¥´¥X¨Ó*/
+	/*0xc94[0]=1, 0xe94[0]=1: ï¿½ï¿½txï¿½qiqkï¿½ï¿½ï¿½Xï¿½ï¿½*/
 	odm_set_bb_reg(p_dm_odm, 0xc94, BIT(0), 0x1);
 	odm_set_bb_reg(p_dm_odm, 0xe94, BIT(0), 0x1);
 	odm_set_bb_reg(p_dm_odm, 0xc94, (BIT(11) | BIT(10)), 0x1);
@@ -942,7 +942,7 @@ _iqk_one_shot_8822b(
 	if (idx == TXIQK) {
 		if (fail)
 			odm_set_bb_reg(p_dm_odm, iqk_apply[path], BIT(0), 0x0);
-		else	
+		else
 			_iqk_backup_iqk_8822b(p_dm_odm, 0x2, path);
 	}
 
@@ -1365,7 +1365,7 @@ _phy_iq_calibrate_by_fw_8822b(
 )
 {
 	struct PHY_DM_STRUCT	*p_dm_odm = (struct PHY_DM_STRUCT *)p_dm_void;
-	struct _IQK_INFORMATION	*p_iqk_info = &p_dm_odm->IQK_info;	
+	struct _IQK_INFORMATION	*p_iqk_info = &p_dm_odm->IQK_info;
 	enum hal_status		status = HAL_STATUS_FAILURE;
 	u8 segment_iqk = 0x0;
 

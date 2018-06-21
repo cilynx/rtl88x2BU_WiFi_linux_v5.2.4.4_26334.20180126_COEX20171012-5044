@@ -319,12 +319,12 @@ u8 rtw_get_op_chs_by_cch_bw(u8 cch, u8 bw, u8 **op_chs, u8 *op_ch_num)
 	u8 valid = 1;
 
 	if (cch <= 14
-		&& bw >= CHANNEL_WIDTH_20 && bw <= CHANNEL_WIDTH_40
+		&& bw <= CHANNEL_WIDTH_40
 	) {
 		c_chs_ent = &center_chs_2g_by_bw[bw];
 		op_chs_ent = &op_chs_of_cch_2g_by_bw[bw];
 	} else if (cch >= 36 && cch <= 177
-		&& bw >= CHANNEL_WIDTH_20 && bw <= CHANNEL_WIDTH_160
+		&& bw <= CHANNEL_WIDTH_160
 	) {
 		c_chs_ent = &center_chs_5g_by_bw[bw];
 		op_chs_ent = &op_chs_of_cch_5g_by_bw[bw];
@@ -1667,7 +1667,7 @@ s8 rtw_rf_get_kfree_tx_gain_offset(_adapter *padapter, u8 path, u8 ch)
 		kfree_offset = kfree_data->bb_gain[bb_gain_sel][path];
 		if (IS_HARDWARE_TYPE_8723D(padapter))
 			RTW_INFO("%s path:%s, ch:%u, bb_gain_sel:%d, kfree_offset:%d\n"
-				, __func__, (path == 0)?"S1":"S0", 
+				, __func__, (path == 0)?"S1":"S0",
 				ch, bb_gain_sel, kfree_offset);
 		else
 			RTW_INFO("%s path:%u, ch:%u, bb_gain_sel:%d, kfree_offset:%d\n"
@@ -1696,7 +1696,7 @@ void rtw_rf_set_tx_gain_offset(_adapter *adapter, u8 path, s8 offset)
 		target_path = path;
 		RTW_INFO("kfree gain_offset 0x55:0x%x ", rtw_hal_read_rfreg(adapter, target_path, 0x55, 0xffffffff));
 	}
-	
+
 	switch (rtw_get_chip_type(adapter)) {
 #ifdef CONFIG_RTL8723D
 	case RTL8723D:
@@ -1744,7 +1744,7 @@ void rtw_rf_set_tx_gain_offset(_adapter *adapter, u8 path, s8 offset)
 		rtw_warn_on(1);
 		break;
 	}
-	
+
 	if (IS_HARDWARE_TYPE_8723D(adapter)) {
 		if (path == PPG_8723D_S1)
 			val32 = rtw_hal_read_rfreg(adapter, target_path, 0x55, 0xffffffff);

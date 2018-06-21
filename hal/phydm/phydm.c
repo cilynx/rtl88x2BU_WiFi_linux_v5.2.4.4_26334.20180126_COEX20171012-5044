@@ -538,7 +538,7 @@ phydm_dynamicsoftmletting(
 
 			if (true == p_dm_odm->bsomlenabled) {
 				ODM_RT_TRACE(p_dm_odm,ODM_COMP_API,ODM_DBG_TRACE,("PHYDM_DynamicSoftMLSetting(): SoML has been enable, skip dynamic SoML switch\n"));
-				return; 		
+				return;
 			}
 
 			ret_val = odm_get_bb_reg(p_dm_odm, 0xf8c, MASKBYTE0);
@@ -564,10 +564,11 @@ phydm_init_soft_ml_setting(
 {
 #if (RTL8822B_SUPPORT == 1)
 	if (*(p_dm_odm->p_mp_mode) == false) {
-		if (p_dm_odm->support_ic_type & ODM_RTL8822B)
+		if (p_dm_odm->support_ic_type & ODM_RTL8822B) {
 			/*odm_set_bb_reg(p_dm_odm, 0x19a8, MASKDWORD, 0xd10a0000);*/
 			phydm_somlrxhp_setting(p_dm_odm, true);
 			p_dm_odm->bsomlenabled = true;
+		}
 	}
 #endif
 #if (RTL8821C_SUPPORT == 1)
@@ -830,7 +831,7 @@ phydm_supportability_init_win(
 	switch (p_dm_odm->support_ic_type) {
 
 	/*---------------N Series--------------------*/
-	#if (RTL8188E_SUPPORT == 1)	
+	#if (RTL8188E_SUPPORT == 1)
 	case	ODM_RTL8188E:
 		support_ability |=
 			ODM_BB_DIG				|
@@ -943,7 +944,7 @@ phydm_supportability_init_win(
 			ODM_BB_NHM_CNT;
 		break;
 	#endif
-	
+
 	/*---------------AC Series-------------------*/
 
 	#if ((RTL8812A_SUPPORT == 1) || (RTL8821A_SUPPORT == 1))
@@ -963,7 +964,7 @@ phydm_supportability_init_win(
 		break;
 	#endif
 
-	#if (RTL8814A_SUPPORT == 1) 
+	#if (RTL8814A_SUPPORT == 1)
 	case ODM_RTL8814A:
 		support_ability |=
 			ODM_BB_DIG				|
@@ -978,8 +979,8 @@ phydm_supportability_init_win(
 			ODM_BB_NHM_CNT;
 		break;
 	#endif
-	
-	#if (RTL8814B_SUPPORT == 1) 
+
+	#if (RTL8814B_SUPPORT == 1)
 	case ODM_RTL8814B:
 		support_ability |=
 			ODM_BB_DIG				|
@@ -995,7 +996,7 @@ phydm_supportability_init_win(
 		break;
 	#endif
 
-	#if (RTL8822B_SUPPORT == 1) 
+	#if (RTL8822B_SUPPORT == 1)
 	case ODM_RTL8822B:
 		support_ability |=
 			ODM_BB_DIG				|
@@ -1012,7 +1013,7 @@ phydm_supportability_init_win(
 		break;
 	#endif
 
-	#if (RTL8821C_SUPPORT == 1) 
+	#if (RTL8821C_SUPPORT == 1)
 	case ODM_RTL8821C:
 		support_ability |=
 			ODM_BB_DIG				|
@@ -1049,7 +1050,7 @@ phydm_supportability_init_win(
 	/*[Config Antenna Diveristy]*/
 	if (*(p_dm_odm->p_enable_antdiv))
 		support_ability |= ODM_BB_ANT_DIV;
-	
+
 	/*[Config Adaptivity]*/
 	if (*(p_dm_odm->p_enable_adaptivity))
 		support_ability |= ODM_BB_ADAPTIVITY;
@@ -1070,7 +1071,7 @@ phydm_supportability_init_ce(
 	switch (p_dm_odm->support_ic_type) {
 
 	/*---------------N Series--------------------*/
-	#if (RTL8188E_SUPPORT == 1)	
+	#if (RTL8188E_SUPPORT == 1)
 	case	ODM_RTL8188E:
 		support_ability |=
 			ODM_BB_DIG				|
@@ -1144,7 +1145,7 @@ phydm_supportability_init_ce(
 			ODM_BB_FA_CNT			|
 			ODM_BB_RSSI_MONITOR		|
 			ODM_BB_CCK_PD			|
-			/* ODM_BB_PWR_TRAIN	| */	
+			/* ODM_BB_PWR_TRAIN	| */
 			ODM_BB_RATE_ADAPTIVE	|
 			ODM_BB_CFO_TRACKING		|
 			ODM_BB_NHM_CNT;
@@ -1182,7 +1183,7 @@ phydm_supportability_init_ce(
 			ODM_BB_NHM_CNT;
 		break;
 	#endif
-		
+
 	/*---------------AC Series-------------------*/
 
 	#if ((RTL8812A_SUPPORT == 1) || (RTL8821A_SUPPORT == 1))
@@ -1202,7 +1203,7 @@ phydm_supportability_init_ce(
 		break;
 	#endif
 
-	#if (RTL8814A_SUPPORT == 1) 
+	#if (RTL8814A_SUPPORT == 1)
 	case ODM_RTL8814A:
 		support_ability |=
 			ODM_BB_DIG				|
@@ -1217,8 +1218,8 @@ phydm_supportability_init_ce(
 			ODM_BB_NHM_CNT;
 		break;
 	#endif
-	
-	#if (RTL8814B_SUPPORT == 1) 
+
+	#if (RTL8814B_SUPPORT == 1)
 	case ODM_RTL8814B:
 		support_ability |=
 			ODM_BB_DIG				|
@@ -1234,7 +1235,7 @@ phydm_supportability_init_ce(
 		break;
 	#endif
 
-	#if (RTL8822B_SUPPORT == 1) 
+	#if (RTL8822B_SUPPORT == 1)
 	case ODM_RTL8822B:
 		support_ability |=
 			ODM_BB_DIG				|
@@ -1251,7 +1252,7 @@ phydm_supportability_init_ce(
 		break;
 	#endif
 
-	#if (RTL8821C_SUPPORT == 1) 
+	#if (RTL8821C_SUPPORT == 1)
 	case ODM_RTL8821C:
 		support_ability |=
 			ODM_BB_DIG				|
@@ -1284,15 +1285,15 @@ phydm_supportability_init_ce(
 		break;
 
 	}
-	
+
 	/*[Config Antenna Diveristy]*/
 	if (*(p_dm_odm->p_enable_antdiv))
 		support_ability |= ODM_BB_ANT_DIV;
-	
+
 	/*[Config Adaptivity]*/
 	if (*(p_dm_odm->p_enable_adaptivity))
 		support_ability |= ODM_BB_ADAPTIVITY;
-	
+
 	return support_ability;
 }
 #endif
@@ -1309,7 +1310,7 @@ phydm_supportability_init_ap(
 	switch (p_dm_odm->support_ic_type) {
 
 	/*---------------N Series--------------------*/
-	#if (RTL8188E_SUPPORT == 1)	
+	#if (RTL8188E_SUPPORT == 1)
 	case	ODM_RTL8188E:
 		support_ability |=
 			ODM_BB_DIG				|
@@ -1357,7 +1358,7 @@ phydm_supportability_init_ap(
 			ODM_BB_NHM_CNT;
 		break;
 	#endif
-		
+
 	#if ((RTL8198F_SUPPORT == 1) || (RTL8197F_SUPPORT == 1))
 	case	ODM_RTL8198F:
 	case	ODM_RTL8197F:
@@ -1374,7 +1375,7 @@ phydm_supportability_init_ap(
 			ODM_BB_NHM_CNT;
 		break;
 	#endif
-	
+
 	/*---------------AC Series-------------------*/
 
 	#if (RTL8881A_SUPPORT == 1)
@@ -1393,7 +1394,7 @@ phydm_supportability_init_ap(
 		break;
 	#endif
 
-	#if (RTL8814A_SUPPORT == 1) 
+	#if (RTL8814A_SUPPORT == 1)
 	case ODM_RTL8814A:
 		support_ability |=
 			ODM_BB_DIG				|
@@ -1408,8 +1409,8 @@ phydm_supportability_init_ap(
 			ODM_BB_NHM_CNT;
 		break;
 	#endif
-	
-	#if (RTL8814B_SUPPORT == 1) 
+
+	#if (RTL8814B_SUPPORT == 1)
 	case ODM_RTL8814B:
 		support_ability |=
 			ODM_BB_DIG				|
@@ -1425,7 +1426,7 @@ phydm_supportability_init_ap(
 		break;
 	#endif
 
-	#if (RTL8822B_SUPPORT == 1) 
+	#if (RTL8822B_SUPPORT == 1)
 	case ODM_RTL8822B:
 		support_ability |=
 			ODM_BB_DIG				|
@@ -1442,7 +1443,7 @@ phydm_supportability_init_ap(
 		break;
 	#endif
 
-	#if (RTL8821C_SUPPORT == 1) 
+	#if (RTL8821C_SUPPORT == 1)
 	case ODM_RTL8821C:
 		support_ability |=
 			ODM_BB_DIG				|
@@ -1481,7 +1482,7 @@ phydm_supportability_init_ap(
 	/*[Config Antenna Diveristy]*/
 	if (*(p_dm_odm->p_enable_antdiv))
 		support_ability |= ODM_BB_ANT_DIV;
-	
+
 	/*[Config Adaptivity]*/
 	if (*(p_dm_odm->p_enable_adaptivity))
 		support_ability |= ODM_BB_ADAPTIVITY;
@@ -1533,7 +1534,7 @@ phydm_supportability_init_iot(
 			ODM_BB_NHM_CNT;
 		break;
 	#endif
-	
+
 	default:
 		support_ability |=
 			ODM_BB_DIG				|
@@ -1551,15 +1552,15 @@ phydm_supportability_init_iot(
 		break;
 
 	}
-	
+
 	/*[Config Antenna Diveristy]*/
 	if (*(p_dm_odm->p_enable_antdiv))
 		support_ability |= ODM_BB_ANT_DIV;
-	
+
 	/*[Config Adaptivity]*/
 	if (*(p_dm_odm->p_enable_adaptivity))
 		support_ability |= ODM_BB_ADAPTIVITY;
-	
+
 	return support_ability;
 }
 #endif
@@ -1628,7 +1629,7 @@ phydm_supportability_init(
 {
 	struct PHY_DM_STRUCT		*p_dm_odm = (struct PHY_DM_STRUCT *)p_dm_void;
 	u32	support_ability;
-	
+
 	if (*(p_dm_odm->p_mp_mode) == true) {
 		support_ability = 0;
 		/**/
@@ -1769,7 +1770,7 @@ phydm_primary_cca(
 		odm_dynamic_primary_cca_check_8192e(p_dm_odm);
 		#endif
 	}
-	
+
 #endif
 }
 
@@ -2518,13 +2519,13 @@ phydm_cmn_info_query(
 
 	case PHYDM_INFO_DBG_PORT_0:
 		return false_alm_cnt->dbg_port0;
-				
+
 	case PHYDM_INFO_CRC32_OK_HT_AGG:
 		return false_alm_cnt->cnt_ht_crc32_ok_agg;
-		
+
 	case PHYDM_INFO_CRC32_ERROR_HT_AGG:
 		return false_alm_cnt->cnt_ht_crc32_error_agg;
-					
+
 
 	default:
 		return 0xffffffff;
@@ -3945,11 +3946,11 @@ phydm_stop_ck320(
 ) {
 	struct PHY_DM_STRUCT		*p_dm_odm = (struct PHY_DM_STRUCT *)p_dm_void;
 	u32		reg_value = (enable == true) ? 1 : 0;
-	
+
 	if (p_dm_odm->support_ic_type & ODM_IC_11AC_SERIES) {
 		odm_set_bb_reg(p_dm_odm, 0x8b4, BIT(6), reg_value);
 		/**/
-	} else { 
+	} else {
 
 	 	if (p_dm_odm->support_ic_type & ODM_IC_N_2SS) {	/*N-2SS*/
 			odm_set_bb_reg(p_dm_odm, 0x87c, BIT(29), reg_value);
@@ -3968,7 +3969,7 @@ phydm_dc_cancellation(
 	struct PHY_DM_STRUCT	*p_dm_odm
 
 )
-{	
+{
 #if PHYDM_DC_CANCELLATION
 	u32		offset_i_hex[ODM_RF_PATH_MAX] = {0};
 	u32		offset_q_hex[ODM_RF_PATH_MAX] = {0};
@@ -3977,7 +3978,7 @@ phydm_dc_cancellation(
 
 	if (!(p_dm_odm->support_ic_type & ODM_DC_CANCELLATION_SUPPORT))
 		return;
-	
+
 	/*DC_Estimation (only for 2x2 ic now) */
 
 for (det_num = 0; det_num < ODM_RF_PATH_MAX; det_num++) {
@@ -4001,19 +4002,19 @@ for (det_num = 0; det_num < ODM_RF_PATH_MAX; det_num++) {
 					ODM_RT_TRACE(p_dm_odm, ODM_COMP_COMMON, ODM_DBG_LOUD, ("[DC Cancellation] Only one-path now"));
 					break;
 				}
-				
+
 				if (!phydm_set_bb_dbg_port(p_dm_odm, BB_DBGPORT_PRIORITY_2, 0x202)) {/*set debug port to 0x200*/
 					ODM_RT_TRACE(p_dm_odm, ODM_COMP_COMMON, ODM_DBG_LOUD, ("[DC Cancellation] Set Debug port Fail"));
 					return;
 				}
 				phydm_bb_dbg_port_header_sel(p_dm_odm, 0x0);
-			} 
+			}
 	}
-	
+
 	//odm_set_bb_reg(p_dm_odm, 0x908, bMaskDWord, 0x235);
 	//odm_set_bb_reg(p_dm_odm, 0xa78, BIT(3), 0x1);
 	odm_write_dig(p_dm_odm, 0x7E);
-	
+
 	if (p_dm_odm->support_ic_type & ODM_IC_11N_SERIES) {
 		odm_set_bb_reg(p_dm_odm, 0x88c, BIT(21)|BIT(20), 0x3);
 	} else {
@@ -4021,18 +4022,18 @@ for (det_num = 0; det_num < ODM_RF_PATH_MAX; det_num++) {
 		odm_set_bb_reg(p_dm_odm, 0xe00, BIT(1)|BIT(0), 0x0);
 	}
 	odm_set_bb_reg(p_dm_odm, 0xa78, MASKBYTE1, 0x0); /*disable CCK DCNF*/
-	
+
 	ODM_RT_TRACE(p_dm_odm, ODM_COMP_COMMON, ODM_DBG_LOUD, (" DC cancellation Begin!!!"));
-	
+
 #if 0
 
 	odm_set_bb_reg(p_dm_odm, 0x87c, BIT(31), 0x1);	/*stop ck320*/
 	offset_i_hex = odm_get_bb_reg(p_dm_odm, 0xDF4, 0xffc0000);
 	offset_q_hex = odm_get_bb_reg(p_dm_odm, 0xDF4, 0x3ff00);
 	odm_set_bb_reg(p_dm_odm, 0x87c, BIT(31), 0x0);	/*start ck320*/
-	
+
 #else
-	
+
 	phydm_stop_ck320(p_dm_odm, true);	/*stop ck320*/
 
 		/* the same debug port both for path-a and path-b*/
@@ -4054,9 +4055,9 @@ for (det_num = 0; det_num < ODM_RF_PATH_MAX; det_num++) {
 	odm_write_dig(p_dm_odm, 0x20);
 	phydm_release_bb_dbg_port(p_dm_odm);
 
-	ODM_RT_TRACE(p_dm_odm, ODM_COMP_COMMON, ODM_DBG_LOUD, (" DC cancellation OK!!!"));	
+	ODM_RT_TRACE(p_dm_odm, ODM_COMP_COMMON, ODM_DBG_LOUD, (" DC cancellation OK!!!"));
 }
-		
+
 	/*DC_Cancellation*/
 	odm_set_bb_reg(p_dm_odm, 0xa9c, BIT(20), 0x1); /*DC compensation to CCK data path*/
 	if (p_dm_odm->support_ic_type & (ODM_RTL8188F | ODM_RTL8710B)) {
@@ -4070,7 +4071,7 @@ for (det_num = 0; det_num < ODM_RF_PATH_MAX; det_num++) {
 		odm_set_bb_reg(p_dm_odm, 0x950, 0x1ff, offset_i_hex[1]);
 		odm_set_bb_reg(p_dm_odm, 0x950, 0x1ff0000, offset_q_hex[1]);
 	} else if (p_dm_odm->support_ic_type & (ODM_RTL8821C | ODM_RTL8822B)) {
-	
+
 		/* Path-a */
 		offset_i_hex[0] = (reg_value32[0] & 0xffc00) >> 10;
 		offset_q_hex[0] = reg_value32[0] & 0x3ff;
@@ -4086,7 +4087,7 @@ for (det_num = 0; det_num < ODM_RF_PATH_MAX; det_num++) {
 
 		/* Path-b */
 		if (p_dm_odm->support_ic_type & ODM_RTL8822B) {
-			
+
 			offset_i_hex[1] = (reg_value32[1] & 0xffc00) >> 10;
 			offset_q_hex[1] = reg_value32[1] & 0x3ff;
 
@@ -4116,9 +4117,9 @@ phydm_receiver_blocking(
 
 	if (!(p_dm_odm->support_ic_type & ODM_RECEIVER_BLOCKING_SUPPORT))
 		return;
-	
+
 	if (p_dm_odm->consecutive_idlel_time > 10 && *p_dm_odm->p_mp_mode == false && p_dm_odm->adaptivity_enable == true) {
-		if ((bw == ODM_BW20M) && (channel == 1) && !p_dm_odm->is_nbi_enable) { 
+		if ((bw == ODM_BW20M) && (channel == 1) && !p_dm_odm->is_nbi_enable) {
 			set_result = phydm_nbi_setting(p_dm_odm, NBI_ENABLE, channel, 20, 2410, PHYDM_DONT_CARE);
 			p_dm_odm->is_nbi_enable = true;
 		} else if ((bw == ODM_BW20M) && (channel == 13) && !p_dm_odm->is_nbi_enable) {
@@ -4136,8 +4137,7 @@ phydm_receiver_blocking(
 			p_dm_odm->is_nbi_enable = false;
 		}
 	}
-	ODM_RT_TRACE(p_dm_odm, PHYDM_COMP_ADAPTIVITY, ODM_DBG_LOUD, 
+	ODM_RT_TRACE(p_dm_odm, PHYDM_COMP_ADAPTIVITY, ODM_DBG_LOUD,
 		("[NBI set result: %s]\n", (set_result == SET_SUCCESS ? "Success" : (set_result == SET_NO_NEED ? "No need" : "Error"))));
 #endif
 }
-

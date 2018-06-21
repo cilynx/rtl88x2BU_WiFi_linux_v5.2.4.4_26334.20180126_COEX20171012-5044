@@ -815,17 +815,17 @@ sint recv_ucast_pn_decache(union recv_frame *precv_frame, struct stainfo_rxcache
 	if (tid > 15)
 		return _FAIL;
 
-	if (pattrib->encrypt == _AES_) {		
+	if (pattrib->encrypt == _AES_) {
 		_rtw_memcpy(&tmp_iv_hdr, (pdata + pattrib->hdrlen), 8);
 		tmp_iv_hdr = le64_to_cpu(tmp_iv_hdr);
-		pkt_pn = (tmp_iv_hdr & 0x000000000000ffff)		|	
+		pkt_pn = (tmp_iv_hdr & 0x000000000000ffff)		|
 			((tmp_iv_hdr & 0xffffffff00000000) >> 16);
-		
+
 		_rtw_memcpy(&tmp_iv_hdr, prxcache->iv[tid], 8);
 		tmp_iv_hdr = le64_to_cpu(tmp_iv_hdr);
-		curr_pn = (tmp_iv_hdr & 0x000000000000ffff)		|	
+		curr_pn = (tmp_iv_hdr & 0x000000000000ffff)		|
 			((tmp_iv_hdr & 0xffffffff00000000) >> 16);
-			
+
 		if (curr_pn == 0) {
 			_rtw_memcpy(prxcache->iv[tid], (pdata + pattrib->hdrlen), sizeof(prxcache->iv[tid]));
 			goto exit;
@@ -857,21 +857,21 @@ sint recv_bcast_pn_decache(union recv_frame *precv_frame)
 	u8 key_id;
 
 	if ((pattrib->encrypt == _AES_) &&
-		(check_fwstate(pmlmepriv, WIFI_STATION_STATE) == _TRUE)) {		
+		(check_fwstate(pmlmepriv, WIFI_STATION_STATE) == _TRUE)) {
 		_rtw_memcpy(&tmp_iv_hdr, (pdata + pattrib->hdrlen), 8);
 		tmp_iv_hdr = le64_to_cpu(tmp_iv_hdr);
 		key_id = ((tmp_iv_hdr & 0x00000000c0000000) >> 30);
-		pkt_pn = (tmp_iv_hdr & 0x000000000000ffff)		|	
+		pkt_pn = (tmp_iv_hdr & 0x000000000000ffff)		|
 			((tmp_iv_hdr & 0xffffffff00000000) >> 16);
 
 		if (key_id >= 4 )
 			return _FAIL;
-		
+
 		_rtw_memcpy(&tmp_iv_hdr,  psecuritypriv->iv_seq[key_id], 8);
 		tmp_iv_hdr = le64_to_cpu(tmp_iv_hdr);
 		curr_pn = (tmp_iv_hdr & 0x0000ffffffffffff);
 
-		if ((curr_pn == 0) && (pkt_pn >= 0)) {
+		if (curr_pn == 0) {
 			_rtw_memcpy(psecuritypriv->iv_seq[key_id], &pkt_pn, 8);
 			goto exit;
 		}
@@ -1952,7 +1952,7 @@ sint validate_recv_data_frame(_adapter *adapter, union recv_frame *precv_frame)
 			#endif
 			ret = _FAIL;
 			goto exit;
-		}		
+		}
 	} else {
 		if (recv_bcast_pn_decache(precv_frame) == _FAIL) {
 			#ifdef DBG_RX_DROP_FRAME
@@ -2287,8 +2287,9 @@ sint validate_recv_frame(_adapter *adapter, union recv_frame *precv_frame)
 			if ((bDumpRxPkt == 4) && (eth_type == 0x888e))
 				dump_rx_packet(ptr);
 #endif
-		} else
+		} else {
 			DBG_COUNTER(adapter->rx_logs.core_rx_pre_data_handled);
+		}
 		break;
 	default:
 		DBG_COUNTER(adapter->rx_logs.core_rx_pre_unknown);
@@ -4745,4 +4746,3 @@ exit:
 	return 0;
 }
 #endif /* CONFIG_RECV_THREAD_MODE */
-
