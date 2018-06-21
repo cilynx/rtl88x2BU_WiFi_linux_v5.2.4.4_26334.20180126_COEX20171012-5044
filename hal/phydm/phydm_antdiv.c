@@ -91,8 +91,8 @@ odm_sw_ant_div_rest_after_link(
 		for (i = 0; i < ODM_ASSOCIATE_ENTRY_NUM; i++)
 			phydm_antdiv_reset_statistic(p_dm_odm, i);
 	}
-	
-#endif	
+
+#endif
 }
 
 
@@ -142,9 +142,9 @@ odm_ant_div_on_off(
 					odm_set_bb_reg(p_dm_odm, 0x948, BIT(6), 1);	/*1:HW ctrl  0:SW ctrl*/
 				} else {
 					odm_set_bb_reg(p_dm_odm, 0xce0, BIT(1), 0);
-					odm_set_bb_reg(p_dm_odm, 0x948, BIT(6), 0);	/*1:HW ctrl  0:SW ctrl*/ 
-				}	
-			}			
+					odm_set_bb_reg(p_dm_odm, 0x948, BIT(6), 0);	/*1:HW ctrl  0:SW ctrl*/
+				}
+			}
 #endif
 
 		} else if (p_dm_odm->support_ic_type & ODM_AC_ANTDIV_SUPPORT) {
@@ -295,7 +295,7 @@ odm_update_rx_idle_ant(
 				phydm_set_tx_ant_pwr_8723d(p_dm_odm, ant);
 				odm_update_rx_idle_ant_8723d(p_dm_odm, ant, default_ant, optional_ant);
 			}
-#endif			
+#endif
 			else { /*8188E & 8188F*/
 #if (RTL8188F_SUPPORT == 1)
 				if (p_dm_odm->support_ic_type == ODM_RTL8188F) {
@@ -1172,7 +1172,7 @@ odm_update_rx_idle_ant_8723d(
 	u8			count = 0;
 	u8			u1_temp;
 	u8			h2c_parameter;
-	
+
 
 /*	odm_set_bb_reg(p_dm_odm, 0x948, BIT(6), 0x1);	*/
 	odm_set_bb_reg(p_dm_odm, 0x948, BIT(7), default_ant);
@@ -1634,7 +1634,7 @@ phydm_hl_smart_ant_type2_init_8822b(
 			{0xd, 0},
 			{0xe, 0},
 			{0xf, 0}
-		}; 
+		};
 	u8	rfu_codeword_table_init_5g[SUPPORT_BEAM_SET_PATTERN_NUM][MAX_PATH_NUM_8822B] ={
 		#if 1
 			{9, 1},/*0*/
@@ -1671,7 +1671,7 @@ phydm_hl_smart_ant_type2_init_8822b(
 			{6, 6},
 			{2, 6}
 		#endif
-		}; 		
+		};
 
 	ODM_RT_TRACE(p_dm_odm, ODM_COMP_ANT_DIV, ODM_DBG_LOUD, ("***RTK 8822B SmartAnt_Init: Hong-Bo SmrtAnt Type2]\n"));
 
@@ -1697,10 +1697,10 @@ phydm_hl_smart_ant_type2_init_8822b(
 	/*Hong_lin smart antenna HW setting*/
 	pdm_sat_table->rfu_protocol_type = 2;
 	pdm_sat_table->rfu_protocol_delay_time = 45;
-	
+
 	pdm_sat_table->rfu_codeword_total_bit_num  = 16;/*max=32bit*/
 	pdm_sat_table->rfu_each_ant_bit_num = 4;
-	
+
 	pdm_sat_table->total_beam_set_num = 4;
 	pdm_sat_table->total_beam_set_num_2g = 4;
 	pdm_sat_table->total_beam_set_num_5g = 8;
@@ -1730,14 +1730,14 @@ phydm_hl_smart_ant_type2_init_8822b(
 	pdm_sat_table->pre_fast_training_beam_num = pdm_sat_table->fast_training_beam_num;
 
 	for (j = 0; j < SUPPORT_BEAM_SET_PATTERN_NUM; j++) {
-		
+
 		pdm_sat_table->beam_set_avg_rssi_pre[j] = 0;
 		pdm_sat_table->beam_set_train_val_diff[j] = 0;
 		pdm_sat_table->beam_set_train_cnt[j] = 0;
 	}
 	phydm_set_rfu_beam_pattern_type2(p_dm_odm);
 	p_dm_fat_table->fat_state = FAT_BEFORE_LINK_STATE;
-	
+
 }
 #endif
 #endif
@@ -1906,7 +1906,7 @@ odm_s0s1_sw_ant_div_init_8188f(
 		else if (p_dm_odm->support_interface == ODM_ITRF_SDIO)
 			odm_set_mac_reg(p_dm_odm, 0x44, BIT(18), 0x1);	/*enable_output for P_GPIO[2]*/
 	}
-	
+
 	p_dm_fat_table->is_become_linked  = false;
 	p_dm_swat_table->try_flag = SWAW_STEP_INIT;
 	p_dm_swat_table->double_chk_flag = 0;
@@ -1939,7 +1939,7 @@ phydm_update_rx_idle_antenna_8188F(
 				odm_set_bb_reg(p_dm_odm, 0x860, BIT(9)|BIT8, 0x2);
 			}
 			odm_set_mac_reg(p_dm_odm, 0x44, BIT(10), codeword); /*GPIO[2] output value*/
-		}	
+		}
 	}
 }
 #endif
@@ -2747,7 +2747,7 @@ odm_s0s1_sw_ant_div(
 					train_time_temp += 8;
 					high_traffic_train_time_l = 0x28;
 				}
-				
+
 				if (p_dm_odm->support_ic_type == ODM_RTL8188F) {
 					if (p_dm_odm->support_interface == ODM_ITRF_SDIO)
 						high_traffic_train_time_l += 0xa;
@@ -3024,19 +3024,19 @@ odm_s0s1_sw_ant_div(
 		if (p_dm_odm->support_interface == ODM_ITRF_SDIO) {
 
 			ODM_delay_us(200);
-			
+
 			if (p_dm_fat_table->rx_idle_ant == MAIN_ANT) {
 				p_dm_fat_table->main_ant_sum[0] = 0;
 				p_dm_fat_table->main_ant_cnt[0] = 0;
 				p_dm_fat_table->main_ant_sum_cck[0] = 0;
-				p_dm_fat_table->main_ant_cnt_cck[0] = 0;	
+				p_dm_fat_table->main_ant_cnt_cck[0] = 0;
 			} else {
 				p_dm_fat_table->aux_ant_sum[0] = 0;
 				p_dm_fat_table->aux_ant_cnt[0] = 0;
 				p_dm_fat_table->aux_ant_sum_cck[0] = 0;
-				p_dm_fat_table->aux_ant_cnt_cck[0] = 0;	
-			}	
-		}	
+				p_dm_fat_table->aux_ant_cnt_cck[0] = 0;
+			}
+		}
 	}
 
 	/* 1 6.Set next timer   (Trying state) */
@@ -3213,7 +3213,7 @@ odm_s0s1_sw_ant_div_by_ctrl_frame_process_rssi(
 		odm_antsel_statistics_of_ctrl_frame(p_dm_odm, p_dm_fat_table->antsel_rx_keep_0, p_phy_info->rx_mimo_signal_strength[ODM_RF_PATH_A]);
 	} else {
 		p_dm_fat_table->antsel_rx_keep_0 = (p_dm_fat_table->rx_idle_ant == MAIN_ANT) ? ANT1_2G : ANT2_2G;
-		
+
 		if (p_dm_fat_table->antsel_rx_keep_0 == ANT1_2G)
 			p_dm_fat_table->ofdm_ctrl_frame_cnt_main++;
 		else
@@ -3572,12 +3572,12 @@ phydm_construct_hb_rfu_codeword_type2(
 			data_tmp = pdm_sat_table->rfu_codeword_table_5g[beam_set_idx][i];
 		else
 			data_tmp = pdm_sat_table->rfu_codeword_table_2g[beam_set_idx][i];
-			
+
 		codeword |= (data_tmp << (i * pdm_sat_table->rfu_each_ant_bit_num));
 	}
 
 	codeword = (codeword<<8) | sync_codeword;
-	
+
 	return codeword;
 }
 
@@ -3606,7 +3606,7 @@ phydm_update_beam_pattern_type2(
 
 	for (i = 0; i <= (codeword_length - 1); i++) {
 		beam_ctrl_signal = (boolean)((codeword & BIT(i)) >> i);
-		
+
 		#if 1
 		if (p_dm_odm->debug_components & ODM_COMP_ANT_DIV) {
 
@@ -3625,7 +3625,7 @@ phydm_update_beam_pattern_type2(
 			}
 		}
 		#endif
-		
+
 		if (p_dm_odm->support_ic_type == ODM_RTL8821) {
 			#if (RTL8821A_SUPPORT == 1)
 			reg44_tmp_p = reg44_ori & (~(BIT(11) | BIT10)); /*clean bit 10 & 11*/
@@ -3645,13 +3645,13 @@ phydm_update_beam_pattern_type2(
 				reg44_tmp_p = reg44_tmp_p & ~(BIT(8)); /*clean bit 8*/
 				reg44_tmp_p = reg44_tmp_p ^ BIT(9); /*get new clk high/low, exclusive-or*/
 
-	
+
 				reg44_tmp_p |= (beam_ctrl_signal << 8);
-				
+
 				odm_set_mac_reg(p_dm_odm, 0x44, MASKDWORD, reg44_tmp_p);
 				ODM_delay_us(pdm_sat_table->rfu_protocol_delay_time);
 				/*ODM_RT_TRACE(p_dm_odm, ODM_COMP_ANT_DIV, ODM_DBG_LOUD, ("reg44 =(( 0x%x )), reg44[9:8] = ((%x)), beam_ctrl_signal =((%x))\n", reg44_tmp_p, ((reg44_tmp_p & 0x300)>>8), beam_ctrl_signal));*/
-				
+
 			} else {
 				reg44_tmp_p = reg44_ori & (~(BIT(9) | BIT8)); /*clean bit 9 & 8*/
 				reg44_tmp_p |= ((1 << 9) | (beam_ctrl_signal << 8));
@@ -3740,9 +3740,9 @@ phydm_hl_smart_ant_debug_type2(
 
 				ODM_RT_TRACE(p_dm_odm, ODM_COMP_ANT_DIV, ODM_DBG_LOUD, ("[ SmartAnt ] Codeword overflow, Current codeword is ((0x%x)), and should be less than ((%d))bit\n",
 					pdm_sat_table->fix_beam_pattern_codeword, codeword_length));
-				
+
 				(pdm_sat_table->fix_beam_pattern_codeword) &= 0xffffff;
-				
+
 				ODM_RT_TRACE(p_dm_odm, ODM_COMP_ANT_DIV, ODM_DBG_LOUD, ("[ SmartAnt ] Auto modify to (0x%x)\n", pdm_sat_table->fix_beam_pattern_codeword));
 			}
 
@@ -3750,9 +3750,9 @@ phydm_hl_smart_ant_debug_type2(
 
 			/*---------------------------------------------------------*/
 			PHYDM_SNPRINTF((output + used, out_len - used, "Fix Beam Pattern\n"));
-			
+
 			/*devide_num = (pdm_sat_table->rfu_protocol_type == 2) ? 8 : 4;*/
-			
+
 			for (i = 0; i <= (codeword_length - 1); i++) {
 				beam_ctrl_signal = (boolean)((pdm_sat_table->update_beam_codeword & BIT(i)) >> i);
 
@@ -3830,7 +3830,7 @@ phydm_hl_smart_ant_debug_type2(
 				pdm_sat_table->rfu_codeword_table_2g[dm_value[2] ][1] = (u8)dm_value[4];
 				PHYDM_SNPRINTF((output + used, out_len - used, "[SmtAnt] Set 2G Table[%d] = [A:0x%x, B:0x%x]\n",dm_value[2], dm_value[3], dm_value[4]));
 			}
-			
+
 		} else if (dm_value[1] == 2) { /*5G*/
 			if (dm_value[2] < SUPPORT_BEAM_SET_PATTERN_NUM) {
 				pdm_sat_table->rfu_codeword_table_5g[dm_value[2] ][0] = (u8)dm_value[3];
@@ -3877,7 +3877,7 @@ phydm_hl_smart_ant_debug_type2(
 			pdm_sat_table->total_beam_set_num_5g = (u8)(dm_value[2]);
 			PHYDM_SNPRINTF((output + used, out_len - used, "[ SmartAnt ] total_beam_set_num_5g = ((%d))\n", pdm_sat_table->total_beam_set_num_5g));
 		} else if (dm_value[1] == 0) {
-			PHYDM_SNPRINTF((output + used, out_len - used, "[ SmartAnt ] Show total_beam_set_num{2g,5g} = {%d,%d}\n", 
+			PHYDM_SNPRINTF((output + used, out_len - used, "[ SmartAnt ] Show total_beam_set_num{2g,5g} = {%d,%d}\n",
 				pdm_sat_table->total_beam_set_num_2g, pdm_sat_table->total_beam_set_num_5g));
 		}
 
@@ -4020,7 +4020,7 @@ phydm_fast_ant_training_hl_smart_antenna_type2(
 
 				pdm_sat_table->beam_set_avg_evm_1ss_pre[j] = (u8)avg_evm1ss;
 			}
-				
+
 			if (avg_evm1ss > target_beam_max_evm1ss) {
 				evm1ss_target_beam = j;
 				target_beam_max_evm1ss = avg_evm1ss;
@@ -4034,15 +4034,15 @@ phydm_fast_ant_training_hl_smart_antenna_type2(
 			pdm_sat_table->beam_path_rssi_sum[j][0] = 0;
 			pdm_sat_table->beam_path_rssi_sum[j][1] = 0;
 			pdm_sat_table->statistic_pkt_cnt[j] = 0;
-			
+
 			pdm_sat_table->beam_path_evm_2ss_sum[j][0] = 0;
 			pdm_sat_table->beam_path_evm_2ss_sum[j][1] = 0;
 			pdm_sat_table->beam_path_evm_2ss_cnt[j] = 0;
-			
+
 			pdm_sat_table->beam_path_evm_1ss_sum[j] = 0;
 			pdm_sat_table->beam_path_evm_1ss_cnt[j] = 0;
 		}
-		
+
 		/*[Joint Decision]-------------------------------------------------------------------*/
 		ODM_RT_TRACE(p_dm_odm, ODM_COMP_ANT_DIV, ODM_DBG_LOUD, ("--->1.[RSSI]      Target Beam(( %d )) RSSI_max=((%d))\n", rssi_target_beam, target_beam_max_rssi));
 		ODM_RT_TRACE(p_dm_odm, ODM_COMP_ANT_DIV, ODM_DBG_LOUD, ("--->2.[Evm2SS] Target Beam(( %d )) EVM2SS_max=((%d))\n", evm2ss_target_beam, target_beam_max_evm2ss));
@@ -4071,7 +4071,7 @@ phydm_fast_ant_training_hl_smart_antenna_type2(
 
 			if (decision_type == 1) {
 				per_beam_val_diff_tmp = target_beam_max_rssi - pdm_sat_table->beam_set_avg_rssi_pre[j];
-				
+
 			} else if (decision_type == 2) {
 				per_beam_val_diff_tmp = ((u8)target_beam_max_evm2ss - pdm_sat_table->beam_set_avg_evm_2ss_pre[j]) >> 1;
 			} else if (decision_type == 3) {
@@ -4160,7 +4160,7 @@ phydm_fast_ant_training_hl_smart_antenna_type2(
 				break;
 			}
 		}
-		
+
 		ODM_RT_TRACE(p_dm_odm, ODM_COMP_ANT_DIV, ODM_DBG_LOUD, ("TrafficLoad = (( %d )), Fix_beam = (( %d )), per_beam_training_pkt_num = (( %d )), decision_holding_period = ((%d))\n",
 			p_dm_odm->traffic_load, pdm_sat_table->fix_training_num_en, pdm_sat_table->per_beam_training_pkt_num, pdm_sat_table->decision_holding_period));
 
@@ -4185,11 +4185,11 @@ phydm_fast_ant_training_hl_smart_antenna_type2(
 			ODM_RT_TRACE(p_dm_odm, ODM_COMP_ANT_DIV, ODM_DBG_LOUD, ("Beam_Set[ %d ] training_pkt_offset = ((%d)), training_pkt_num = ((%d))\n",
 				j, pdm_sat_table->beam_set_train_val_diff[j], pdm_sat_table->beam_set_train_cnt[j]));
 		}
-		
+
 		pdm_sat_table->pre_beacon_counter = pdm_sat_table->beacon_counter;
 		pdm_sat_table->update_beam_idx = 0;
 		pdm_sat_table->pkt_counter = 0;
-		
+
 		pdm_sat_table->fast_training_beam_num = 0;
 		phydm_set_rfu_beam_pattern_type2(p_dm_odm);
 		pdm_sat_table->pre_fast_training_beam_num = pdm_sat_table->fast_training_beam_num;
@@ -4366,13 +4366,13 @@ phydm_update_beam_pattern(
 				reg44_tmp_p = reg44_tmp_p & ~(BIT(8)); /*clean bit 8*/
 				reg44_tmp_p = reg44_tmp_p ^ BIT(9); /*get new clk high/low, exclusive-or*/
 
-	
+
 				reg44_tmp_p |= (beam_ctrl_signal << 8);
-				
+
 				odm_set_mac_reg(p_dm_odm, 0x44, MASKDWORD, reg44_tmp_p);
 				ODM_delay_us(10);
 				/*ODM_RT_TRACE(p_dm_odm, ODM_COMP_ANT_DIV, ODM_DBG_LOUD, ("reg44 =(( 0x%x )), reg44[9:8] = ((%x)), beam_ctrl_signal =((%x))\n", reg44_tmp_p, ((reg44_tmp_p & 0x300)>>8), beam_ctrl_signal));*/
-				
+
 			} else {
 				reg44_tmp_p = reg44_ori & (~(BIT(9) | BIT8)); /*clean bit 9 & 8*/
 				reg44_tmp_p |= ((1 << 9) | (beam_ctrl_signal << 8));
@@ -4448,9 +4448,9 @@ phydm_hl_smart_ant_debug(
 
 				ODM_RT_TRACE(p_dm_odm, ODM_COMP_ANT_DIV, ODM_DBG_LOUD, ("[ SmartAnt ] Codeword overflow, Current codeword is ((0x%x)), and should be less than ((%d))bit\n",
 					pdm_sat_table->fix_beam_pattern_codeword, codeword_length));
-				
+
 				(pdm_sat_table->fix_beam_pattern_codeword) &= 0xffffff;
-				
+
 				ODM_RT_TRACE(p_dm_odm, ODM_COMP_ANT_DIV, ODM_DBG_LOUD, ("[ SmartAnt ] Auto modify to (0x%x)\n", pdm_sat_table->fix_beam_pattern_codeword));
 			}
 
@@ -4458,9 +4458,9 @@ phydm_hl_smart_ant_debug(
 
 			/*---------------------------------------------------------*/
 			PHYDM_SNPRINTF((output + used, out_len - used, "Fix Beam Pattern\n"));
-			
+
 			devide_num = (pdm_sat_table->rfu_protocol_type == 2) ? 6 : 4;
-			
+
 			for (i = 0; i <= (codeword_length - 1); i++) {
 				beam_ctrl_signal = (boolean)((pdm_sat_table->update_beam_codeword & BIT(i)) >> i);
 
@@ -5613,7 +5613,7 @@ phydm_process_rssi_for_hb_smtant_type2(
 	void		*p_dm_void,
 	void		*p_phy_info_void,
 	void		*p_pkt_info_void,
-	u8		rssi_avg	
+	u8		rssi_avg
 )
 {
 	struct PHY_DM_STRUCT				*p_dm_odm = (struct PHY_DM_STRUCT *)p_dm_void;
@@ -5644,7 +5644,7 @@ phydm_process_rssi_for_hb_smtant_type2(
 			pdm_sat_table->update_beam_idx++;
 			ODM_RT_TRACE(p_dm_odm, ODM_COMP_ANT_DIV, ODM_DBG_LOUD, ("pre_beacon_counter = ((%d)), pkt_counter = ((%d)), update_beam_idx = ((%d))\n",
 				pdm_sat_table->pre_beacon_counter, pdm_sat_table->pkt_counter, pdm_sat_table->update_beam_idx));
-			
+
 			pdm_sat_table->pre_beacon_counter = pdm_sat_table->beacon_counter;
 			pdm_sat_table->pkt_counter = 0;
 		}
@@ -5665,7 +5665,7 @@ phydm_process_rssi_for_hb_smtant_type2(
 			{
 				pdm_sat_table->beam_set_rssi_avg_sum[pdm_sat_table->fast_training_beam_num] += rssi_avg;
 				pdm_sat_table->statistic_pkt_cnt[pdm_sat_table->fast_training_beam_num]++;
-				
+
 				pdm_sat_table->beam_path_rssi_sum[pdm_sat_table->fast_training_beam_num][0] += rx_power_ant0;
 				pdm_sat_table->beam_path_rssi_sum[pdm_sat_table->fast_training_beam_num][1] += rx_power_ant1;
 
@@ -5678,7 +5678,7 @@ phydm_process_rssi_for_hb_smtant_type2(
 					pdm_sat_table->beam_path_evm_1ss_cnt[pdm_sat_table->fast_training_beam_num]++;
 				}
 			}
-			
+
 			pdm_sat_table->pkt_counter++;
 
 			train_pkt_number = pdm_sat_table->beam_set_train_cnt[pdm_sat_table->fast_training_beam_num];
@@ -5688,7 +5688,7 @@ phydm_process_rssi_for_hb_smtant_type2(
 				pdm_sat_table->update_beam_idx++;
 				ODM_RT_TRACE(p_dm_odm, ODM_COMP_ANT_DIV, ODM_DBG_LOUD, ("pre_beacon_counter = ((%d)), Update_new_beam = ((%d))\n",
 					pdm_sat_table->pre_beacon_counter, pdm_sat_table->update_beam_idx));
-				
+
 				pdm_sat_table->pre_beacon_counter = pdm_sat_table->beacon_counter;
 				pdm_sat_table->pkt_counter = 0;
 			}
@@ -5696,7 +5696,7 @@ phydm_process_rssi_for_hb_smtant_type2(
 	}
 
 	if (pdm_sat_table->update_beam_idx > 0) {
-		
+
 		pdm_sat_table->update_beam_idx = 0;
 
 		if (pdm_sat_table->fast_training_beam_num >= ((u32)pdm_sat_table->total_beam_set_num - 1)) {
@@ -5720,7 +5720,7 @@ phydm_process_rssi_for_hb_smtant_type2(
 			p_dm_fat_table->fat_state = FAT_TRAINING_STATE;
 		}
 	}
-	
+
 }
 #endif
 
@@ -5754,12 +5754,12 @@ odm_process_rssi_for_ant_div(
 
 		if (rx_power_ant1 < 100)
 			rssi_avg = (u8)odm_convert_to_db((odm_convert_to_linear(rx_power_ant0) + odm_convert_to_linear(rx_power_ant1))>>1); /*averaged PWDB*/
-		
+
 	} else {
 		rx_power_ant0 = (u8)p_phy_info->rx_pwdb_all;
 		rssi_avg = rx_power_ant0;
 	}
-	
+
 #ifdef CONFIG_HL_SMART_ANTENNA_TYPE2
 	if ((p_dm_odm->ant_div_type == HL_SW_SMART_ANT_TYPE2) && (p_dm_fat_table->fat_state == FAT_TRAINING_STATE)) {
 			/*for 8822B*/
@@ -5932,7 +5932,7 @@ odm_process_rssi_for_ant_div(
 						odm_antsel_statistics(p_dm_odm, p_phy_info, p_dm_fat_table->antsel_rx_keep_0, p_pktinfo->station_id, rx_power_ant0, RSSI_METHOD, is_cck_rate);
 
 				} else {
-					
+
 					odm_antsel_statistics(p_dm_odm, p_phy_info, p_dm_fat_table->antsel_rx_keep_0, p_pktinfo->station_id, rx_power_ant0, RSSI_METHOD, is_cck_rate);
 
 					#ifdef ODM_EVM_ENHANCE_ANTDIV

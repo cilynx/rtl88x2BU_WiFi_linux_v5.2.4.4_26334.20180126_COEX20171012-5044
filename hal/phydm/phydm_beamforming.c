@@ -44,7 +44,7 @@ phydm_sta_info_init(
 
 	p_entry->ht_beamform_cap = p_ht_info->HtBeamformCap;
 	p_entry->vht_beamform_cap = p_vht_info->VhtBeamformCap;
-	
+
 	/*IBSS, AP mode*/
 	if (sta_idx != 0) {
 		p_entry->aid = p_sta->AID;

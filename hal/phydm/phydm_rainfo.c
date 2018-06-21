@@ -2223,7 +2223,7 @@ odm_refresh_rate_adaptive_mask_mp(
 	struct _ADAPTER			*p_loop_adapter = GetDefaultAdapter(p_adapter);
 	PMGNT_INFO					p_loop_mgnt_info = &(p_loop_adapter->MgntInfo);
 	HAL_DATA_TYPE				*p_loop_hal_data = GET_HAL_DATA(p_loop_adapter);
-	
+
 	u32		i;
 	struct sta_info *p_entry;
 	u8		ratr_state_new;
@@ -2245,7 +2245,7 @@ odm_refresh_rate_adaptive_mask_mp(
 
 		p_loop_mgnt_info = &(p_loop_adapter->MgntInfo);
 		p_loop_hal_data = GET_HAL_DATA(p_loop_adapter);
-	
+
 		if (p_loop_mgnt_info->mAssoc && (!ACTING_AS_AP(p_loop_adapter))) {
 			odm_refresh_ldpc_rts_mp(p_loop_adapter, p_dm_odm, p_loop_mgnt_info->mMacId, p_loop_mgnt_info->IOTPeer, p_loop_hal_data->UndecoratedSmoothedPWDB);
 		/*ODM_RT_TRACE(p_dm_odm, ODM_COMP_RA_MASK, ODM_DBG_LOUD, ("Infrasture mode\n"));*/
@@ -2479,7 +2479,7 @@ phydm_gen_ramask_h2c_AP(
 		GET_HAL_INTERFACE(priv)->UpdateHalRAMaskHandler(priv, p_entry, rssi_level);
 #endif
 
-	} 
+	}
 }
 
 #endif

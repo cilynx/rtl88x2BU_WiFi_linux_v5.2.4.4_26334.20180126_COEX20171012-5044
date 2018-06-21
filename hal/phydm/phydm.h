@@ -240,7 +240,7 @@ struct _odm_phy_dbg_info_ {
 	u16		num_qry_vht_pkt[40];
 	u8		vht_pkt_not_zero;
 	#endif
-	
+
 	u8		rssi_cck_avg;
 	u32		rssi_cck_sum;
 	u32		rssi_cck_cnt;
@@ -548,10 +548,10 @@ enum phy_reg_pg_type {
 	u8			is_nbi_enable;
 	u16			fw_offload_ability;
 /*-----------HOOK BEFORE REG INIT-----------*/
-/*===========================================================*/	
+/*===========================================================*/
 /*====[ CALL BY Reference ]=========================================*/
-/*===========================================================*/	
-	
+/*===========================================================*/
+
 	struct _ADAPTER	*PADAPTER_temp;
 
 	u8			*p_mac_phy_mode;			/*MAC PHY mode SMSP/DMSP/DMDP = 0/1/2*/
@@ -589,10 +589,10 @@ enum phy_reg_pg_type {
 	u32			*p_soft_ap_mode;
 	u8			*p_mp_mode;
 
-/*===========================================================*/	
+/*===========================================================*/
 /*====[ CALL BY VALUE ]===========================================*/
-/*===========================================================*/	
-	
+/*===========================================================*/
+
 	boolean		is_link_in_process;
 	boolean		is_wifi_direct;
 	boolean		is_wifi_display;
@@ -611,7 +611,7 @@ enum phy_reg_pg_type {
 	u8			number_linked_client;
 	u8			pre_number_active_client;
 	u8			number_active_client;
-	
+
 	/*---Common info for BTDM-------------------------------------*/
 	boolean		is_bt_enabled;			/*BT is enabled*/
 	boolean		is_bt_connect_process;	/*BT HS is under connection progress.*/
@@ -694,7 +694,7 @@ enum phy_reg_pg_type {
 	u8			antdiv_evm_en;
 	u8			bdc_holdstate;
 	/*---------------------------*/
-	
+
 	u8			ndpa_period;
 	boolean		h2c_rarpt_connect;
 	boolean		cck_agc_report_type;
@@ -723,7 +723,7 @@ enum phy_reg_pg_type {
 	u8			ap_total_num;
 	boolean		edcca_enable;
 	/*-----------------------------------------------------------*/
-	
+
 	u8			pre_dbg_priority;
 	u8			nbi_set_result;
 	u8			csi_set_result;
@@ -741,7 +741,7 @@ enum phy_reg_pg_type {
 	boolean		pre_b_noisy;
 	u32			noisy_decision_smooth;
 	/*-----------------------------------------------------------*/
-	
+
 	boolean		is_disable_dym_ecs;
 	boolean		is_disable_dym_ant_weighting;
 	struct sta_info	*p_odm_sta_info[ODM_ASSOCIATE_ENTRY_NUM];/*_ODM_STA_INFO, 2012/01/12 MH For MP, we need to reduce one array pointer for default port.??*/
@@ -768,7 +768,7 @@ enum phy_reg_pg_type {
 	boolean		is_psd_in_process;
 	boolean		is_psd_active;
 	/*-----------------------------------------------------------*/
-	
+
 	u8			is_use_ra_mask;	/*for rate adaptive, in fact,  88c/92c fw will handle this*/
 	boolean		bsomlenabled;		/* for dynamic SoML control */
 	boolean		bhtstfenabled;		/* for dynamic HTSTF gain control	*/
@@ -846,7 +846,7 @@ enum phy_reg_pg_type {
 #endif
 	struct _FAST_ANTENNA_TRAINNING_		dm_fat_table;
 	struct _dynamic_initial_gain_threshold_	dm_dig_table;
-	
+
 #if (defined(CONFIG_BB_POWER_SAVING))
 	struct _dynamic_power_saving			dm_ps_table;
 #endif
@@ -862,10 +862,10 @@ enum phy_reg_pg_type {
 	struct _hal_rf_						rf_table; 		/*for HALRF function*/
 	struct _ODM_RATE_ADAPTIVE			rate_adaptive;
 	struct odm_rf_calibration_structure		rf_calibrate_info;
-	struct odm_power_trim_data			power_trim_data;	
+	struct odm_power_trim_data			power_trim_data;
 #if (RTL8822B_SUPPORT == 1)
 	struct phydm_rtl8822b_struct			phydm_rtl8822b;
-#endif	
+#endif
 #if (CONFIG_PSD_TOOL == 1)
 	struct _PHYDM_PSD_					dm_psd_table;
 #endif
@@ -1053,7 +1053,7 @@ odm_sign_conversion(
 void
 phydm_txcurrentcalibration(
 	struct PHY_DM_STRUCT	*p_dm_odm
-);	
+);
 
 void
 phydm_seq_sorting(

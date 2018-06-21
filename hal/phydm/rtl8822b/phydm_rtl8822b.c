@@ -61,7 +61,7 @@ phydm_dynamic_parameters_ota(
 	s32    	sig_power;
 	u32		value32, bktreg, bktreg1, bktreg2, bktreg3;
 	u8    	pwdb;
-	
+
 	value32 = odm_get_bb_reg(p_dm_odm, 0xF90, MASKDWORD);
 	pwdb = (u8)((value32 & MASKBYTE1) >> 8);
 	pwdb = pwdb >> 1;
@@ -121,7 +121,7 @@ _setTxACaliValue(
 	boolean bMinus = false;
 	u8 compValue = 0;
 
-	
+
 		switch (offset) {
 		case 0x0:
 			odm_set_rf_reg(p_dm_odm, eRFPath, 0x18, 0xFFFFF, 0X10124);
@@ -175,37 +175,37 @@ _setTxACaliValue(
 			bMinus = true;
 			compValue = 3;
 			break;
-			
+
 		case 0xF4:
 			bMinus = true;
 			compValue = 2;
 			break;
-			
+
 		case 0xF2:
 			bMinus = true;
 			compValue = 1;
 			break;
-			
+
 		case 0xF3:
 			bMinus = false;
 			compValue = 1;
 			break;
-			
+
 		case 0xF5:
 			bMinus = false;
 			compValue = 2;
 			break;
-			
+
 		case 0xF7:
 			bMinus = false;
 			compValue = 3;
 			break;
-			
+
 		case 0xF9:
 			bMinus = false;
 			compValue = 4;
 			break;
-		
+
 		/* do nothing case */
 		case 0xF0:
 		default:
@@ -281,11 +281,11 @@ phydm_txcurrentcalibration(
 	/* save original 0x18 value */
 	origRF0x18PathA = odm_get_rf_reg(p_dm_odm, ODM_RF_PATH_A, 0x18, 0xFFFFF);
 	origRF0x18PathB = odm_get_rf_reg(p_dm_odm, ODM_RF_PATH_B, 0x18, 0xFFFFF);
-	
+
 	/* define efuse content */
 		efuse0x3D8 = p_dm_odm->efuse0x3d8;
 		efuse0x3D7 = p_dm_odm->efuse0x3d7;
-	
+
 	/* check efuse content to judge whether need to calibration or not */
 	if (0xFF == efuse0x3D7) {
 		ODM_RT_TRACE(p_dm_odm, ODM_COMP_MP, ODM_DBG_LOUD, ("efuse content 0x3D7 == 0xFF, No need to do TxA cali\n"));
@@ -295,7 +295,7 @@ phydm_txcurrentcalibration(
 	/* write RF register for calibration */
 	_txaBiasCali4eachPath(p_dm_odm, ODM_RF_PATH_A, efuse0x3D7);
 	_txaBiasCali4eachPath(p_dm_odm, ODM_RF_PATH_B, efuse0x3D8);
-	
+
 	/* restore original 0x18 value */
 	odm_set_rf_reg(p_dm_odm, ODM_RF_PATH_A, 0x18, 0xFFFFF, origRF0x18PathA);
 	odm_set_rf_reg(p_dm_odm, ODM_RF_PATH_B, 0x18, 0xFFFFF, origRF0x18PathB);
@@ -339,7 +339,7 @@ phydm_dynamic_select_cck_path_8822b(
 
 	ODM_RT_TRACE(p_dm, ODM_PHY_CONFIG, ODM_DBG_LOUD,
 		("path_a_fa = %d, path_b_fa = %d\n", p_8822b->path_a_cck_fa, p_8822b->path_b_cck_fa));
-	
+
 }
 
 void
@@ -379,10 +379,10 @@ phydm_somlrxhp_setting(
 			} else {
 				odm_set_bb_reg(p_dm_odm, 0x8cc, MASKDWORD, 0x08108492);
 				odm_set_bb_reg(p_dm_odm, 0x8d8, BIT(27), 0x1);
-			}	
+			}
 		}
 		/* ODM_RT_TRACE(p_dm_odm, ODM_COMP_COMMON, ODM_DBG_LOUD, ("Dynamic RxHP control with SoML is enable !!\n")); */
-	} 
+	}
 }
 
 
@@ -416,7 +416,7 @@ phydm_hwsetting_8822b(
 		else
 			p_8822b->path_judge |= ((~ BIT(2)) | ODM_RF_A | ODM_RF_B);
 	}
-	
+
 }
 
 #endif	/* RTL8822B_SUPPORT == 1 */

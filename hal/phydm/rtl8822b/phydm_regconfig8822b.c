@@ -49,7 +49,7 @@ odm_config_rf_reg_8822b(
 							RFREGOFFSETMASK,
 							RF_PATH,
 							100);
-		else {	
+		else {
 			phydm_set_reg_by_fw(p_dm_odm,
 								PHYDM_HALMAC_CMD_RF_W,
 								reg_addr,
@@ -256,7 +256,7 @@ odm_config_bb_phy_8822b(
 									bitmask,
 									0,
 									delay_time);
-		} else 
+		} else
 			phydm_set_reg_by_fw(p_dm_odm,
 								PHYDM_HALMAC_CMD_BB_W32,
 								addr,
@@ -284,7 +284,7 @@ odm_config_bb_phy_8822b(
 		else
 			odm_set_bb_reg(p_dm_odm, addr, bitmask, data);
 	}
-	
+
 	ODM_RT_TRACE(p_dm_odm, ODM_COMP_INIT, ODM_DBG_LOUD, ("===> config_bb: [PHY_REG] %08X %08X\n", addr, data));
 }
 

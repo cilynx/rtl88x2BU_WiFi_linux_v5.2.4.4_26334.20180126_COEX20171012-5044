@@ -1376,7 +1376,7 @@ static int wpa_set_encryption(struct net_device *dev, struct ieee_param *param, 
 						/* DEBUG_ERR((" param->u.crypt.key_len=%d\n", param->u.crypt.key_len)); */
 						if (param->u.crypt.idx < 4) {
 							_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
-							_rtw_memcpy(padapter->securitypriv.iv_seq[param->u.crypt.idx], param->u.crypt.seq, 8);							
+							_rtw_memcpy(padapter->securitypriv.iv_seq[param->u.crypt.idx], param->u.crypt.seq, 8);
 						}
 						RTW_INFO(" ~~~~set sta key:groupkey\n");
 
@@ -10752,7 +10752,7 @@ static int rtw_priv_mp_get(struct net_device *dev,
 	case  BT_EFUSE_FILE:
 		RTW_INFO("mp_get BT EFUSE_FILE\n");
 		rtw_bt_efuse_file_map(dev, info, wdata, extra);
-		break;	
+		break;
 	default:
 		return -EIO;
 	}
@@ -10991,7 +10991,7 @@ static int rtw_priv_get(struct net_device *dev,
 	if (subcmd < MP_NULL) {
 #ifdef CONFIG_MP_INCLUDED
 		rtw_priv_mp_get(dev, info, wdata, extra);
-#endif		
+#endif
 		return 0;
 	}
 

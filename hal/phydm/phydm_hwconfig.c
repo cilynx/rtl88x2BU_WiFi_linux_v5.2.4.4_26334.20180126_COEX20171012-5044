@@ -72,15 +72,15 @@ phydm_rx_statistic_cal(
 	u8									date_rate = (p_pktinfo->data_rate & 0x7f);
 
 	if (date_rate <= ODM_RATE54M) {
-		
+
 		p_phydm->phy_dbg_info.num_qry_legacy_pkt[date_rate]++;
-		/**/	
+		/**/
 	} else if (date_rate <= ODM_RATEMCS31) {
-		
+
 		p_phydm->phy_dbg_info.num_qry_ht_pkt[date_rate - ODM_RATEMCS0]++;
 		p_phydm->phy_dbg_info.ht_pkt_not_zero = true;
-			
-	} 
+
+	}
 	#if ODM_IC_11AC_SERIES_SUPPORT
 	else if (date_rate <= ODM_RATEVHTSS4MCS9) {
 
@@ -90,8 +90,8 @@ phydm_rx_statistic_cal(
 			p_phydm->phy_dbg_info.num_qry_mu_vht_pkt[date_rate - ODM_RATEVHTSS1MCS0]++;
 			p_phydm->phy_dbg_info.num_of_ppdu[p_pktinfo->ppdu_cnt] = date_rate | BIT(7);
 			p_phydm->phy_dbg_info.gid_num[p_pktinfo->ppdu_cnt] = p_phy_sta_rpt->gid;
-			
-		} else 
+
+		} else
 		#endif
 		{
 			p_phydm->phy_dbg_info.num_qry_vht_pkt[date_rate - ODM_RATEVHTSS1MCS0]++;
@@ -144,7 +144,7 @@ phydm_avg_rssi_for_ss(
 )
 {
 	u8	rate_ss = phydm_rate_to_num_ss(p_dm_odm, p_pktinfo->data_rate);
-	
+
 	if (p_pktinfo->data_rate <= ODM_RATE11M) {
 		p_dm_odm->phy_dbg_info.rssi_cck_sum += p_phy_info->rx_mimo_signal_strength[0];
 		p_dm_odm->phy_dbg_info.rssi_cck_cnt++;
@@ -1307,9 +1307,9 @@ odm_rx_phy_status_jaguar_series_parsing(
 			if (i < ODM_RF_PATH_C) {
 				rx_pwr[i] = (p_phy_sta_rpt->gain_trsw[i] & 0x7F) - 110;
 
-				if (p_pktinfo->is_to_self) 
+				if (p_pktinfo->is_to_self)
 					p_dm_odm->ofdm_agc_idx[i] = p_phy_sta_rpt->gain_trsw[i];
-				
+
 			} else
 				rx_pwr[i] = (p_phy_sta_rpt->gain_trsw_cd[i - 2] & 0x7F) - 110;
 			/* else */
@@ -2221,18 +2221,18 @@ odm_config_rf_with_header_file(
 			else if (e_rf_path == ODM_RF_PATH_D)
 				READ_AND_CONFIG_MP(8814a, _radiod);
 		} else if (config_type == CONFIG_RF_TXPWR_LMT) {
-			if (p_dm_odm->rfe_type == 0) 
+			if (p_dm_odm->rfe_type == 0)
 				READ_AND_CONFIG_MP(8814a,_txpwr_lmt_type0);
 			else if (p_dm_odm->rfe_type == 1)
-				READ_AND_CONFIG_MP(8814a,_txpwr_lmt_type1);				
+				READ_AND_CONFIG_MP(8814a,_txpwr_lmt_type1);
 			else if (p_dm_odm->rfe_type == 2)
-				READ_AND_CONFIG_MP(8814a,_txpwr_lmt_type2);		
+				READ_AND_CONFIG_MP(8814a,_txpwr_lmt_type2);
 			else if (p_dm_odm->rfe_type == 3)
-				READ_AND_CONFIG_MP(8814a,_txpwr_lmt_type3);		
+				READ_AND_CONFIG_MP(8814a,_txpwr_lmt_type3);
 			else if (p_dm_odm->rfe_type == 5)
-				READ_AND_CONFIG_MP(8814a,_txpwr_lmt_type5);		
+				READ_AND_CONFIG_MP(8814a,_txpwr_lmt_type5);
 			else if (p_dm_odm->rfe_type == 7)
-				READ_AND_CONFIG_MP(8814a,_txpwr_lmt_type7);				
+				READ_AND_CONFIG_MP(8814a,_txpwr_lmt_type7);
 			else
 				READ_AND_CONFIG_MP(8814a,_txpwr_lmt);
 		}
@@ -2644,18 +2644,18 @@ odm_config_bb_with_header_file(
 		else if (config_type == CONFIG_BB_AGC_TAB)
 			READ_AND_CONFIG_MP(8814a, _agc_tab);
 		else if (config_type == CONFIG_BB_PHY_REG_PG) {
-			if (p_dm_odm->rfe_type == 0) 
+			if (p_dm_odm->rfe_type == 0)
 				READ_AND_CONFIG_MP(8814a,_phy_reg_pg_type0);
 			else if (p_dm_odm->rfe_type == 2)
-				READ_AND_CONFIG_MP(8814a,_phy_reg_pg_type2);				
+				READ_AND_CONFIG_MP(8814a,_phy_reg_pg_type2);
 			else if (p_dm_odm->rfe_type == 3)
-				READ_AND_CONFIG_MP(8814a,_phy_reg_pg_type3);		
+				READ_AND_CONFIG_MP(8814a,_phy_reg_pg_type3);
 			else if (p_dm_odm->rfe_type == 4)
-				READ_AND_CONFIG_MP(8814a,_phy_reg_pg_type4);		
+				READ_AND_CONFIG_MP(8814a,_phy_reg_pg_type4);
 			else if (p_dm_odm->rfe_type == 5)
-				READ_AND_CONFIG_MP(8814a,_phy_reg_pg_type5);		
+				READ_AND_CONFIG_MP(8814a,_phy_reg_pg_type5);
 			else if (p_dm_odm->rfe_type == 7)
-				READ_AND_CONFIG_MP(8814a,_phy_reg_pg_type7);					
+				READ_AND_CONFIG_MP(8814a,_phy_reg_pg_type7);
 			else
 				READ_AND_CONFIG_MP(8814a,_phy_reg_pg);
 		}
@@ -3153,7 +3153,7 @@ phydm_query_is_mu_api(
 	*p_gid = gid;
 
 	return is_mu;
-	
+
 }
 
 void
@@ -3225,7 +3225,7 @@ phydm_set_per_path_phy_info(
 #endif
 	if (evm_dbm == 64)
 		evm_dbm = 0; /*if 1SS rate, evm_dbm [2nd stream] =64*/
-	
+
 	p_phy_info->rx_mimo_evm_dbm[rx_path] = evm_dbm;
 
 	p_phy_info->rx_mimo_signal_strength[rx_path] = odm_query_rx_pwr_percentage(rx_pwr);
@@ -3293,9 +3293,9 @@ phydm_get_rx_phy_status_type0(
 	s8							rx_power = p_phy_sta_rpt->pwdb - 110;
 
 
-	
+
 	if (p_dm_odm->support_ic_type & ODM_RTL8723D) {
-#if (RTL8723D_SUPPORT == 1)	
+#if (RTL8723D_SUPPORT == 1)
 		rx_power = p_phy_sta_rpt->pwdb - 97;
 #endif
 	}
@@ -3430,10 +3430,10 @@ phydm_get_rx_phy_status_type1(
 			/* Update per-path information (RSSI_dB RSSI_percentage EVM SNR CFO SQ) */
 			/* EVM report is reported by stream, not path */
 			rx_path_pwr_db = p_phy_sta_rpt->pwdb[i] - 110;					/* per-path pwdb in dB domain */
-			
-			if (p_pktinfo->is_to_self) 
+
+			if (p_pktinfo->is_to_self)
 				p_dm_odm->ofdm_agc_idx[i] = p_phy_sta_rpt->pwdb[i];
-			
+
 			phydm_set_per_path_phy_info(i, rx_path_pwr_db, p_phy_sta_rpt->rxevm[rx_count - 1],
 				p_phy_sta_rpt->cfo_tail[i], p_phy_sta_rpt->rxsnr[i], p_phy_info);
 
@@ -3497,10 +3497,10 @@ phydm_get_rx_phy_status_type1(
 	p_dm_odm->dm_fat_table.antsel_rx_keep_1 = p_phy_sta_rpt->antidx_b;
 	p_dm_odm->dm_fat_table.antsel_rx_keep_2 = p_phy_sta_rpt->antidx_c;
 	p_dm_odm->dm_fat_table.antsel_rx_keep_3 = p_phy_sta_rpt->antidx_d;
-	
+
 	#if 0
 	if (p_pktinfo->is_packet_match_bssid) {
-	
+
 		dbg_print("channel = %d, band = %d, l_rxsc = %d, ht_rxsc = %d, rf_mode = %d\n", p_phy_sta_rpt->channel, p_phy_sta_rpt->band, p_phy_sta_rpt->l_rxsc, p_phy_sta_rpt->ht_rxsc, p_phy_sta_rpt->rf_mode);
 		dbg_print("Antidx A = %d, B = %d, C = %d, D = %d\n", p_phy_sta_rpt->antidx_a, p_phy_sta_rpt->antidx_b, p_phy_sta_rpt->antidx_c, p_phy_sta_rpt->antidx_d);
 		dbg_print("pwdb A: 0x%x, B: 0x%x, C: 0x%x, D: 0x%x\n", p_phy_sta_rpt->pwdb[0], p_phy_sta_rpt->pwdb[1], p_phy_sta_rpt->pwdb[2], p_phy_sta_rpt->pwdb[3]);
@@ -3513,7 +3513,7 @@ phydm_get_rx_phy_status_type1(
 		dbg_print("rsvd_0 = %d, rsvd_1 = %d, rsvd_2 = %d, rsvd_3 = %d, rsvd_4 = %d, rsvd_5 = %d\n", p_phy_sta_rpt->rsvd_0, p_phy_sta_rpt->rsvd_1, p_phy_sta_rpt->rsvd_2, p_phy_sta_rpt->rsvd_3, p_phy_sta_rpt->rsvd_4, p_phy_sta_rpt->rsvd_5);
 
 	}
-	
+
 	dbg_print("phydm_get_rx_phy_status_type1   p_pktinfo->is_packet_match_bssid = %d\n", p_pktinfo->is_packet_match_bssid);
 	dbg_print("p_pktinfo->data_rate = 0x%x\n", p_pktinfo->data_rate);
 	#endif
@@ -3777,7 +3777,7 @@ phydm_rx_phy_status_new_type(
 	default:
 		return;
 	}
-	
+
 	if (p_pktinfo->is_packet_match_bssid) {
 		phydm_avg_rssi_for_ss(p_dm_odm, p_phy_info, p_pktinfo);
 		phydm_rx_statistic_cal(p_dm_odm, p_phy_status, p_pktinfo);

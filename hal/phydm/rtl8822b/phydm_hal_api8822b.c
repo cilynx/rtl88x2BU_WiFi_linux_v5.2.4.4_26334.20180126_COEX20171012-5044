@@ -254,14 +254,14 @@ phydm_rfe_8822b(
 			odm_set_bb_reg(p_dm_odm, 0xeb0, (MASKBYTE2 | MASKLWORD), 0x745774);
 			odm_set_bb_reg(p_dm_odm, 0xcb4, MASKBYTE1, 0x57);
 			odm_set_bb_reg(p_dm_odm, 0xeb4, MASKBYTE1, 0x57);
-	
+
 		} else if (channel > 35) {
 			/* signal source */
 			odm_set_bb_reg(p_dm_odm, 0xcb0, (MASKBYTE2 | MASKLWORD), 0x477547);
 			odm_set_bb_reg(p_dm_odm, 0xeb0, (MASKBYTE2 | MASKLWORD), 0x477547);
 			odm_set_bb_reg(p_dm_odm, 0xcb4, MASKBYTE1, 0x75);
 			odm_set_bb_reg(p_dm_odm, 0xeb4, MASKBYTE1, 0x75);
-			
+
 		} else
 			return false;
 
@@ -345,7 +345,7 @@ phydm_ccapar_by_rfe_8822b(
 		is_rfe_type = true;
 	} else
 		odm_move_memory(p_dm_odm, cca_ifem, cca_ifem_ccut, 12 * 4);
-	
+
 	ODM_RT_TRACE(p_dm_odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("%s: Update CCA parameters for Ccut\n", __func__));
 	}
 
@@ -407,7 +407,7 @@ phydm_ccapar_by_rfe_8822b(
 
 	if (phydm_is_dfs_channel(central_ch_8822b) && (bw_8822b == ODM_BW80M))
 		odm_set_bb_reg(p_dm_odm, 0x838, 0x1, 0);
-	
+
 	ODM_RT_TRACE(p_dm_odm, ODM_PHY_CONFIG, ODM_DBG_TRACE, ("%s: (Pkt%d, Intf%d, RFE%d), col = %d\n",
 		__func__, p_dm_odm->package_type, p_dm_odm->support_interface, p_dm_odm->rfe_type, col));
 }
@@ -567,7 +567,7 @@ phydm_init_hw_info_by_rfe_type_8822b(
 		odm_cmn_info_init(p_dm_odm, ODM_CMNINFO_BOARD_TYPE, 0);
 
 		odm_cmn_info_init(p_dm_odm, ODM_CMNINFO_PACKAGE_TYPE, 1);
-		
+
 		odm_cmn_info_init(p_dm_odm, ODM_CMNINFO_EXT_LNA, false);
 		odm_cmn_info_init(p_dm_odm, ODM_CMNINFO_5G_EXT_LNA, false);
 		odm_cmn_info_init(p_dm_odm, ODM_CMNINFO_EXT_PA, false);
@@ -591,9 +591,9 @@ phydm_init_hw_info_by_rfe_type_8822b(
 		odm_cmn_info_init(p_dm_odm, ODM_CMNINFO_APA, (TYPE_APA1 & (mask_path_a | mask_path_b)));
 		odm_cmn_info_init(p_dm_odm, ODM_CMNINFO_GLNA, (TYPE_GLNA1 & (mask_path_a | mask_path_b)));
 		odm_cmn_info_init(p_dm_odm, ODM_CMNINFO_ALNA, (TYPE_ALNA1 & (mask_path_a | mask_path_b)));
-		
+
 		odm_cmn_info_init(p_dm_odm, ODM_CMNINFO_PACKAGE_TYPE, 2);
-		
+
 		odm_cmn_info_init(p_dm_odm, ODM_CMNINFO_EXT_LNA, true);
 		odm_cmn_info_init(p_dm_odm, ODM_CMNINFO_5G_EXT_LNA, true);
 		odm_cmn_info_init(p_dm_odm, ODM_CMNINFO_EXT_PA, true);
@@ -1165,7 +1165,7 @@ config_phydm_switch_band_8822b(
 		/* RxHP dynamic control */
 		/* QFN eFEM RxHP are always low at 2G */
 		reg_8 = odm_get_bb_reg(p_dm_odm, 0x19a8, BIT(31));
-		
+
 		if (!((p_dm_odm->rfe_type == 1) || (p_dm_odm->rfe_type == 6) || (p_dm_odm->rfe_type == 7) || (p_dm_odm->rfe_type == 9))) {
 			/* SoML on */
 			if ((reg_8 == 0x1) && (!((p_dm_odm->rfe_type == 3) || (p_dm_odm->rfe_type == 5)))) {
@@ -1183,7 +1183,7 @@ config_phydm_switch_band_8822b(
 				odm_set_bb_reg(p_dm_odm, 0xe04, BIT(21), 0x1);
 			}
 		}
-		
+
 	} else if (central_ch > 35) {
 		/* 5G */
 
@@ -1831,12 +1831,12 @@ config_phydm_parameter_init_8822b(
 #if (PHYDM_FW_API_FUNC_ENABLE_8822B == 1)
 	} else if (type == ODM_INIT_FW_SETTING) {
 		u8	h2c_content[4] = {0};
-		
+
 		h2c_content[0] = p_dm_odm->rfe_type;
 		h2c_content[1] = p_dm_odm->rf_type;
 		h2c_content[2] = p_dm_odm->cut_version;
 		h2c_content[3] = (p_dm_odm->tx_ant_status << 4) | p_dm_odm->rx_ant_status;
-		
+
 		odm_fill_h2c_cmd(p_dm_odm, PHYDM_H2C_FW_GENERAL_INIT, 4, h2c_content);
 #endif
 	} else {

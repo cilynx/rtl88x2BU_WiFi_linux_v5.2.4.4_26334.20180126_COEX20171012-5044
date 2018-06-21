@@ -1452,7 +1452,7 @@ odm_false_alarm_counter_statistics(
 		/* read VHT CRC32 counter */
 		false_alm_cnt->cnt_vht_crc32_error = 0;
 		false_alm_cnt->cnt_vht_crc32_ok = 0;
-		
+
 #if (RTL8723D_SUPPORT == 1)
 		if (p_dm_odm->support_ic_type == ODM_RTL8723D) {
 			/* read HT CRC32 agg counter */
@@ -1461,7 +1461,7 @@ odm_false_alarm_counter_statistics(
 			false_alm_cnt->cnt_ht_crc32_ok_agg= ret_value & 0xffff;
 		}
 #endif
-		
+
 
 #if (RTL8188E_SUPPORT == 1)
 		if (p_dm_odm->support_ic_type == ODM_RTL8188E) {
@@ -1521,10 +1521,10 @@ odm_false_alarm_counter_statistics(
 			odm_set_bb_reg(p_dm_odm, ODM_REG_PAGE_F_RST_11N, BIT(16), 1);
 			odm_set_bb_reg(p_dm_odm, ODM_REG_PAGE_F_RST_11N, BIT(16), 0);
 		}
-	
+
 		ODM_RT_TRACE(p_dm_odm, ODM_COMP_FA_CNT, ODM_DBG_LOUD, ("[OFDM FA Detail] Parity_Fail = (( %d )), Rate_Illegal = (( %d )), CRC8_fail = (( %d )), Mcs_fail = (( %d )), Fast_Fsync = (( %d )), SB_Search_fail = (( %d ))\n",
 			false_alm_cnt->cnt_parity_fail, false_alm_cnt->cnt_rate_illegal, false_alm_cnt->cnt_crc8_fail, false_alm_cnt->cnt_mcs_fail, false_alm_cnt->cnt_fast_fsync, false_alm_cnt->cnt_sb_search_fail));
-		
+
 	}
 #endif
 
@@ -1777,7 +1777,7 @@ odm_cck_packet_detection_thresh(
 	/* modify by Guo.Mingzhi 2011-12-29 */
 	if (p_dm_odm->is_dual_mac_smart_concurrent == true)
 		return;
-	
+
 	if (p_dm_odm->is_bt_hs_operation) {
 		ODM_RT_TRACE(p_dm_odm, ODM_COMP_DIG, ODM_DBG_LOUD, ("CCK_PD: 0xcd for BT HS mode!!\n"));
 		odm_write_cck_cca_thres(p_dm_odm, 0xcd);
@@ -1804,7 +1804,7 @@ odm_cck_packet_detection_thresh(
 		p_dm_dig_table->cck_fa_ma = false_alm_cnt->cnt_cck_fail;
 	else
 		p_dm_dig_table->cck_fa_ma = ((p_dm_dig_table->cck_fa_ma << 1) + p_dm_dig_table->cck_fa_ma + false_alm_cnt->cnt_cck_fail) >> 2;
-	
+
 	ODM_RT_TRACE(p_dm_odm, ODM_COMP_DIG, ODM_DBG_LOUD, ("CCK_PD: CCK FA moving average = %d\n", p_dm_dig_table->cck_fa_ma));
 
 	if (p_dm_odm->is_linked) {
@@ -1839,7 +1839,7 @@ odm_cck_packet_detection_thresh(
 			} else
 				cur_cck_cca_thres = 0x40;
 		}
-			
+
 #else	/*ODM_AP*/
 
 		if (p_dm_odm->support_ic_type & ODM_RTL8197F) {
@@ -1876,7 +1876,7 @@ odm_cck_packet_detection_thresh(
 
 #endif
 	} else {
-	
+
 		if (p_dm_dig_table->cck_fa_ma > 0x400)
 			cur_cck_cca_thres = 0x83;
 		else if (p_dm_dig_table->cck_fa_ma < 0x200)
@@ -1948,7 +1948,7 @@ odm_write_cck_cca_thres(
 	if (p_dm_dig_table->cur_cck_cca_thres != cur_cck_cca_thres) {	/* modify by Guo.Mingzhi 2012-01-03 */
 		odm_write_1byte(p_dm_odm, ODM_REG(CCK_CCA, p_dm_odm), cur_cck_cca_thres);
 		p_dm_dig_table->cck_fa_ma = 0xffffffff;
-		
+
 #if (RTL8723D_SUPPORT == 1)
 		if (p_dm_odm->support_ic_type & ODM_RTL8723D) {	/* modify by David_Ding for 8723D no Beacon issue */
 			if (cur_cck_cca_thres == 0x40)
