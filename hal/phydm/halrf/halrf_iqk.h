@@ -29,6 +29,8 @@
 #define	TXIQK 0
 #define	RXIQK1 1
 #define	RXIQK2 2
+#define	GSRXK1 0
+#define	GSRXK2 1
 #define kcount_limit_80m 2
 #define kcount_limit_others 4
 #define rxiqk_gs_limit 4
