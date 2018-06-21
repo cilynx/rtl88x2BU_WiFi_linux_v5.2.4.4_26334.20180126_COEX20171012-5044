@@ -726,13 +726,27 @@ check_bss:
 		struct ieee80211_channel *notify_channel;
 		u32 freq;
 		u16 channel = cur_network->network.Configuration.DSConfig;
+		#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 12, 0)
+		struct cfg80211_roam_info roam_info = {};
+		#endif
 
 		freq = rtw_ch2freq(channel);
 		notify_channel = ieee80211_get_channel(wiphy, freq);
 		#endif
 
 		RTW_INFO(FUNC_ADPT_FMT" call cfg80211_roamed\n", FUNC_ADPT_ARG(padapter));
+		#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 12, 0)
+    roam_info.channel     = notify_channel;
+  	roam_info.bssid       = cur_network->network.MacAddress;
+    roam_info.req_ie      = pmlmepriv->assoc_req+sizeof(struct rtw_ieee80211_hdr_3addr)+2;
+		roam_info.req_ie_len  = pmlmepriv->assoc_req_len-sizeof(struct rtw_ieee80211_hdr_3addr)-2;
+    roam_info.resp_ie     = pmlmepriv->assoc_rsp+sizeof(struct rtw_ieee80211_hdr_3addr)+6;
+		roam_info.resp_ie_len = pmlmepriv->assoc_rsp_len-sizeof(struct rtw_ieee80211_hdr_3addr)-6;
+    #endif
 		cfg80211_roamed(padapter->pnetdev
+			#if LINUX_VERSION_CODE >= KERNEL_VERSION(4, 12, 0)
+  		, &roam_info
+			#else
 			#if LINUX_VERSION_CODE > KERNEL_VERSION(2, 6, 39) || defined(COMPAT_KERNEL_RELEASE)
 			, notify_channel
 			#endif
@@ -741,6 +755,7 @@ check_bss:
 			, pmlmepriv->assoc_req_len - sizeof(struct rtw_ieee80211_hdr_3addr) - 2
 			, pmlmepriv->assoc_rsp + sizeof(struct rtw_ieee80211_hdr_3addr) + 6
 			, pmlmepriv->assoc_rsp_len - sizeof(struct rtw_ieee80211_hdr_3addr) - 6
+			#endif
 			, GFP_ATOMIC);
 #ifdef CONFIG_RTW_80211R
 		if ((rtw_to_roam(padapter) > 0) && rtw_chk_ft_flags(padapter, RTW_FT_SUPPORTED))
@@ -5568,7 +5583,7 @@ static int _cfg80211_rtw_mgmt_tx(_adapter *padapter, u8 tx_ch, u8 no_cck, const 
 
 			if (check_fwstate(&padapter->mlmepriv, _FW_LINKED))
 				ext_listen_period = 500;/*500ms*/
-#ifdef CONFIG_P2P				
+#ifdef CONFIG_P2P
 			else
 				ext_listen_period = pwdinfo->ext_listen_period;
 
