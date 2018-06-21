@@ -2018,7 +2018,9 @@ static int readFile(struct file *fp, char *buf, int len)
 		return -EPERM;
 
 	while (sum < len) {
-#if (LINUX_VERSION_CODE >= KERNEL_VERSION(4, 1, 0))
+#if (LINUX_VERSION_CODE >= KERNEL_VERSION(4, 14, 0))
+		rlen = kernel_read(fp, buf + sum, len - sum, &fp->f_pos);
+#elif (LINUX_VERSION_CODE >= KERNEL_VERSION(4, 1, 0))
 		rlen = __vfs_read(fp, buf + sum, len - sum, &fp->f_pos);
 #else
 		rlen = fp->f_op->read(fp, buf + sum, len - sum, &fp->f_pos);
@@ -2678,7 +2680,7 @@ int map_readN(const struct map_t *map, u16 offset, u16 len, u8 *buf)
 			else
 				c_len = seg->sa + seg->len - offset;
 		}
-			
+
 		_rtw_memcpy(c_dst, c_src, c_len);
 	}
 
