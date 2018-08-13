@@ -238,6 +238,7 @@ static struct usb_device_id rtw_usb_id_tbl[] = {
 	{USB_DEVICE_AND_INTERFACE_INFO(USB_VENDER_ID_EDIMAX, 0xB822, 0xff, 0xff, 0xff), .driver_info = RTL8822B}, /* EW-7822ULC */
 	{USB_DEVICE_AND_INTERFACE_INFO(USB_VENDER_ID_EDIMAX, 0xC822, 0xff, 0xff, 0xff), .driver_info = RTL8822B}, //EDX
 	{USB_DEVICE(0x2001, 0x331c), .driver_info = RTL8822B}, /* D-Link - Cameo */
+	{USB_DEVICE(0x2357, 0x0115), .driver_info = RTL8822B}, /* TP-Link Archer T4U V3 */
 #endif /* CONFIG_RTL8822B */
 
 #ifdef CONFIG_RTL8723D
