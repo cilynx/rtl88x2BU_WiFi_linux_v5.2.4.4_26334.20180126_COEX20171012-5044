@@ -1382,7 +1382,7 @@ static int cfg80211_rtw_add_key(struct wiphy *wiphy, struct net_device *ndev,
 	struct key_params *params)
 {
 	char *alg_name;
-	u32 param_len;
+	u32 param_len, dest_end;
 	struct ieee_param *param = NULL;
 	int ret = 0;
 	_adapter *padapter = (_adapter *)rtw_netdev_priv(ndev);
@@ -1452,7 +1452,9 @@ static int cfg80211_rtw_add_key(struct wiphy *wiphy, struct net_device *ndev,
 		goto addkey_end;
 	}
 
-	strncpy((char *)param->u.crypt.alg, alg_name, IEEE_CRYPT_ALG_NAME_LEN);
+	dest_end = sizeof(param->u.crypt.alg) - 1;
+	strncpy(param->u.crypt.alg, alg_name, dest_end);
+	param->u.crypt.alg[dest_end] = '\0';
 
 
 	if (!mac_addr || is_broadcast_ether_addr(mac_addr)) {
