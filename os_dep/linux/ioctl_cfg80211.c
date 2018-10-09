@@ -1453,6 +1453,11 @@ static int cfg80211_rtw_add_key(struct wiphy *wiphy, struct net_device *ndev,
 	}
 
 	dest_end = sizeof(param->u.crypt.alg) - 1;
+	if (strlen(alg_name) >= dest_end) {
+		printk(KERN_WARNING "WLAN cipher suite name too long.\n");
+		printk(KERN_WARNING "Will only use first 15 characters.\n");
+		printk(KERN_WARNING "Please report this bug!\n");
+	}
 	strncpy(param->u.crypt.alg, alg_name, dest_end);
 	param->u.crypt.alg[dest_end] = '\0';
 
