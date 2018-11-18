@@ -55,7 +55,7 @@ enum halrf_ability_e {
 };
 
 enum halrf_cmninfo_e {
-	
+
 	HALRF_CMNINFO_ABILITY = 0,
 	HALRF_CMNINFO_DPK_EN = 1,
 	HALRF_CMNINFO_tmp

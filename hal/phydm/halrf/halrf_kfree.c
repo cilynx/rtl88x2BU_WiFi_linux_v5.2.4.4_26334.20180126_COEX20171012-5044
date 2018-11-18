@@ -323,7 +323,7 @@ phydm_get_power_trim_offset_8822b(
 		}
 
 		odm_efuse_one_byte_read(p_dm_odm, PPG_BB_GAIN_5GL1_TXA_OFFSET, &pg_power, false);
-		
+
 		if (pg_power != 0xff) {
 			/*Path A*/
 			odm_efuse_one_byte_read(p_dm_odm, PPG_BB_GAIN_5GL1_TXA_OFFSET, &pg_power, false);
@@ -348,7 +348,7 @@ phydm_get_power_trim_offset_8822b(
 			p_power_trim_info->bb_gain[4][1] = pg_power;
 			odm_efuse_one_byte_read(p_dm_odm, PPG_BB_GAIN_5GH1_TXB_OFFSET, &pg_power, false);
 			p_power_trim_info->bb_gain[5][1] = pg_power;
-			
+
 			p_power_trim_info->flag |= KFREE_FLAG_ON_5G;
 			p_power_trim_info->flag |= KFREE_FLAG_ON;
 		}
@@ -424,7 +424,7 @@ phydm_get_pa_bias_offset_8822b(
 		/*paht a*/
 		odm_efuse_one_byte_read(p_dm_odm, PPG_PA_BIAS_2G_TXA_OFFSET, &pg_pa_bias, false);
 		pg_pa_bias = pg_pa_bias & 0xf;
-		
+
 		if ((pg_pa_bias & BIT0) == 0)
 			tx_pa_bias[0] = (-1 * (pg_pa_bias >> 1));
 		else
@@ -433,7 +433,7 @@ phydm_get_pa_bias_offset_8822b(
 		/*paht b*/
 		odm_efuse_one_byte_read(p_dm_odm, PPG_PA_BIAS_2G_TXB_OFFSET, &pg_pa_bias, false);
 		pg_pa_bias = pg_pa_bias & 0xf;
-		
+
 		if ((pg_pa_bias & BIT0) == 0)
 			tx_pa_bias[1] = (-1 * (pg_pa_bias >> 1));
 		else
@@ -675,7 +675,7 @@ phydm_config_kfree(
 			}
 
 			if (*p_dm_odm->p_band_type == ODM_BAND_2_4G && p_power_trim_info->flag & KFREE_FLAG_ON_2G) {
-				
+
 				if (channel_to_sw >= 1 && channel_to_sw <= 14)
 					channel_idx = PHYDM_2G;
 

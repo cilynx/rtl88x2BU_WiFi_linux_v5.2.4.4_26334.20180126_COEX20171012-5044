@@ -457,7 +457,7 @@ static void PHY_IQCalibrate(PADAPTER padapter, u8 bReCovery)
 #ifdef CONFIG_RTL8188E
 		phy_iq_calibrate_8188e(padapter, bReCovery);
 #endif
-	} else if (IS_HARDWARE_TYPE_8814A(padapter)) {	
+	} else if (IS_HARDWARE_TYPE_8814A(padapter)) {
 #ifdef CONFIG_RTL8814A
 		phy_iq_calibrate_8814a(&(GET_HAL_DATA(padapter)->odmpriv), bReCovery);
 #endif
@@ -507,7 +507,7 @@ static void PHY_LCCalibrate(PADAPTER padapter)
 #ifdef CONFIG_RTL8188E
 		phy_lc_calibrate_8188e(&(GET_HAL_DATA(padapter)->odmpriv));
 #endif
-	} else if (IS_HARDWARE_TYPE_8814A(padapter)) {	
+	} else if (IS_HARDWARE_TYPE_8814A(padapter)) {
 #ifdef CONFIG_RTL8814A
 		phy_lc_calibrate_8814a(&(GET_HAL_DATA(padapter)->odmpriv));
 #endif
@@ -609,7 +609,7 @@ static void  PHY_SetRFPathSwitch(PADAPTER padapter , BOOLEAN bMain) {
 #ifdef CONFIG_RTL8188E
 		phy_set_rf_path_switch_8188e(padapter, bMain);
 #endif
-	} else if (IS_HARDWARE_TYPE_8814A(padapter)) {	
+	} else if (IS_HARDWARE_TYPE_8814A(padapter)) {
 #ifdef CONFIG_RTL8814A
 		phy_set_rf_path_switch_8814a(padapter, bMain);
 #endif

@@ -70,7 +70,7 @@ halrf_support_ability_debug(
 			PHYDM_SSCANF(input[i + 1], DCMD_DECIMAL, &dm_value[i]);
 		}
 	}
-	
+
 	PHYDM_SNPRINTF((output + used, out_len - used, "\n%s\n", "================================"));
 	if (dm_value[0] == 100) {
 		PHYDM_SNPRINTF((output + used, out_len - used, "[RF Supportability]\n"));
@@ -79,7 +79,7 @@ halrf_support_ability_debug(
 		PHYDM_SNPRINTF((output + used, out_len - used, "01. (( %s ))IQK\n", ((p_rf->rf_supportability & HAL_RF_IQK) ? ("V") : ("."))));
 		PHYDM_SNPRINTF((output + used, out_len - used, "02. (( %s ))LCK\n", ((p_rf->rf_supportability & HAL_RF_LCK) ? ("V") : ("."))));
 		PHYDM_SNPRINTF((output + used, out_len - used, "03. (( %s ))DPK\n", ((p_rf->rf_supportability & HAL_RF_DPK) ? ("V") : ("."))));
-		PHYDM_SNPRINTF((output + used, out_len - used, "%s\n", "================================"));		
+		PHYDM_SNPRINTF((output + used, out_len - used, "%s\n", "================================"));
 	}
 	else {
 
@@ -107,7 +107,7 @@ halrf_cmn_info_set(
 	/*  */
 	struct PHY_DM_STRUCT		*p_dm_odm = (struct PHY_DM_STRUCT *)p_dm_void;
 	struct _hal_rf_				*p_rf = &(p_dm_odm->rf_table);
-	
+
 	switch	(cmn_info) {
 
 		case	HALRF_CMNINFO_ABILITY:
@@ -117,7 +117,7 @@ halrf_cmn_info_set(
 		case	ODM_CMNINFO_DPK_EN:
 			p_rf->dpk_en = (u1Byte)value;
 			break;
-			
+
 		default:
 			/* do nothing */
 			break;
@@ -136,7 +136,7 @@ halrf_cmn_info_get(
 	struct PHY_DM_STRUCT		*p_dm_odm = (struct PHY_DM_STRUCT *)p_dm_void;
 	struct _hal_rf_				*p_rf = &(p_dm_odm->rf_table);
 	u64	return_value = 0;
-	
+
 	switch	(cmn_info) {
 
 		case	HALRF_CMNINFO_ABILITY:
@@ -161,8 +161,8 @@ halrf_supportability_init_mp(
 	switch (p_dm_odm->support_ic_type) {
 
 	case ODM_RTL8814B:
-		#if (RTL8814B_SUPPORT == 1) 
-		p_rf->rf_supportability = 
+		#if (RTL8814B_SUPPORT == 1)
+		p_rf->rf_supportability =
 			HAL_RF_TX_PWR_TRACK	|
 			HAL_RF_IQK				|
 			HAL_RF_LCK				|
@@ -170,9 +170,9 @@ halrf_supportability_init_mp(
 			0;
 		#endif
 		break;
-	#if (RTL8822B_SUPPORT == 1) 
+	#if (RTL8822B_SUPPORT == 1)
 	case ODM_RTL8822B:
-		p_rf->rf_supportability = 
+		p_rf->rf_supportability =
 			HAL_RF_TX_PWR_TRACK	|
 			HAL_RF_IQK				|
 			HAL_RF_LCK				|
@@ -181,9 +181,9 @@ halrf_supportability_init_mp(
 		break;
 	#endif
 
-	#if (RTL8821C_SUPPORT == 1) 
+	#if (RTL8821C_SUPPORT == 1)
 	case ODM_RTL8821C:
-		p_rf->rf_supportability = 
+		p_rf->rf_supportability =
 			HAL_RF_TX_PWR_TRACK	|
 			HAL_RF_IQK				|
 			HAL_RF_LCK				|
@@ -193,7 +193,7 @@ halrf_supportability_init_mp(
 	#endif
 
 	default:
-		p_rf->rf_supportability = 
+		p_rf->rf_supportability =
 			HAL_RF_TX_PWR_TRACK	|
 			HAL_RF_IQK				|
 			HAL_RF_LCK				|
@@ -217,8 +217,8 @@ halrf_supportability_init(
 	switch (p_dm_odm->support_ic_type) {
 
 	case ODM_RTL8814B:
-		#if (RTL8814B_SUPPORT == 1) 
-		p_rf->rf_supportability = 
+		#if (RTL8814B_SUPPORT == 1)
+		p_rf->rf_supportability =
 			HAL_RF_TX_PWR_TRACK	|
 			HAL_RF_IQK				|
 			HAL_RF_LCK				|
@@ -226,9 +226,9 @@ halrf_supportability_init(
 			0;
 		#endif
 		break;
-	#if (RTL8822B_SUPPORT == 1) 
+	#if (RTL8822B_SUPPORT == 1)
 	case ODM_RTL8822B:
-		p_rf->rf_supportability = 
+		p_rf->rf_supportability =
 			HAL_RF_TX_PWR_TRACK	|
 			HAL_RF_IQK				|
 			HAL_RF_LCK				|
@@ -237,9 +237,9 @@ halrf_supportability_init(
 		break;
 	#endif
 
-	#if (RTL8821C_SUPPORT == 1) 
+	#if (RTL8821C_SUPPORT == 1)
 	case ODM_RTL8821C:
-		p_rf->rf_supportability = 
+		p_rf->rf_supportability =
 			HAL_RF_TX_PWR_TRACK	|
 			HAL_RF_IQK				|
 			HAL_RF_LCK				|
@@ -249,7 +249,7 @@ halrf_supportability_init(
 	#endif
 
 	default:
-		p_rf->rf_supportability = 
+		p_rf->rf_supportability =
 			HAL_RF_TX_PWR_TRACK	|
 			HAL_RF_IQK				|
 			HAL_RF_LCK				|
@@ -277,7 +277,7 @@ halrf_init(
 )
 {
 	struct PHY_DM_STRUCT		*p_dm_odm = (struct PHY_DM_STRUCT *)p_dm_void;
-	
+
 	ODM_RT_TRACE(p_dm_odm, ODM_COMP_INIT, ODM_DBG_LOUD, ("HALRF_Init\n"));
 
 	if (*(p_dm_odm->p_mp_mode) == true)

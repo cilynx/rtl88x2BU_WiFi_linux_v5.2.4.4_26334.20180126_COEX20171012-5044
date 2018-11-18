@@ -24,7 +24,7 @@
 #define AVG_THERMAL_NUM_8822B	4
 #define RF_T_METER_8822B		0x42
 
-#define LCK_VERSION	"0x2" 
+#define LCK_VERSION	"0x2"
 
 
 void configure_txpower_track_8822b(

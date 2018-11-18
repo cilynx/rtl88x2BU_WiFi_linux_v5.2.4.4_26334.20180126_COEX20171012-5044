@@ -30,7 +30,7 @@ struct phydm_rtl8822b_struct {
 	enum odm_rf_path_e	path_judge;
 	u16	path_a_cck_fa;
 	u16	path_b_cck_fa;
-	
+
 };
 #endif
 

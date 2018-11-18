@@ -4,7 +4,7 @@
 //============================================================
 //3
 //3 This file defines 8822B RAM code function pointer
-//3 
+//3
 //============================================================
 
 //#define phydm_InitFuncPtrTableRAM   phydm_InitFuncPtrTableRAM8822B

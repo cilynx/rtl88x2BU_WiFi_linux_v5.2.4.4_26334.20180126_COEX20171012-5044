@@ -1376,7 +1376,7 @@ static int wpa_set_encryption(struct net_device *dev, struct ieee_param *param, 
 						/* DEBUG_ERR((" param->u.crypt.key_len=%d\n", param->u.crypt.key_len)); */
 						if (param->u.crypt.idx < 4) {
 							_adapter *padapter = (_adapter *)rtw_netdev_priv(dev);
-							_rtw_memcpy(padapter->securitypriv.iv_seq[param->u.crypt.idx], param->u.crypt.seq, 8);							
+							_rtw_memcpy(padapter->securitypriv.iv_seq[param->u.crypt.idx], param->u.crypt.seq, 8);
 						}
 						RTW_INFO(" ~~~~set sta key:groupkey\n");
 
@@ -3502,7 +3502,7 @@ static int rtw_wx_set_enc_ext(struct net_device *dev,
 			      union iwreq_data *wrqu, char *extra)
 {
 	char *alg_name;
-	u32 param_len;
+	u32 param_len, dest_end;
 	struct ieee_param *param = NULL;
 	struct iw_point *pencoding = &wrqu->encoding;
 	struct iw_encode_ext *pext = (struct iw_encode_ext *)extra;
@@ -3553,7 +3553,14 @@ static int rtw_wx_set_enc_ext(struct net_device *dev,
 		goto exit;
 	}
 
-	strncpy((char *)param->u.crypt.alg, alg_name, IEEE_CRYPT_ALG_NAME_LEN);
+	dest_end = sizeof(param->u.crypt.alg) - 1;
+	if (strlen(alg_name) >= dest_end) {
+		printk(KERN_WARNING "WLAN cipher suite name too long.\n");
+		printk(KERN_WARNING "Will only use first 15 characters.\n");
+		printk(KERN_WARNING "Please report this bug!\n");
+	}
+	strncpy(param->u.crypt.alg, alg_name, dest_end);
+	param->u.crypt.alg[dest_end] = '\0';
 
 	if (pext->ext_flags & IW_ENCODE_EXT_SET_TX_KEY)
 		param->u.crypt.set_tx = 1;
@@ -10752,7 +10759,7 @@ static int rtw_priv_mp_get(struct net_device *dev,
 	case  BT_EFUSE_FILE:
 		RTW_INFO("mp_get BT EFUSE_FILE\n");
 		rtw_bt_efuse_file_map(dev, info, wdata, extra);
-		break;	
+		break;
 	default:
 		return -EIO;
 	}
@@ -10991,7 +10998,7 @@ static int rtw_priv_get(struct net_device *dev,
 	if (subcmd < MP_NULL) {
 #ifdef CONFIG_MP_INCLUDED
 		rtw_priv_mp_get(dev, info, wdata, extra);
-#endif		
+#endif
 		return 0;
 	}
 
