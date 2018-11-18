@@ -1,3 +1,11 @@
+# Newer version available!
+
+If you're looking for the latest and greatest, check out [rtl88x2BU_WiFi_linux_v5.3.1_27678.20180430_COEX20180427-5959
+](https://github.com/cilynx/rtl88x2BU_WiFi_linux_v5.3.1_27678.20180430_COEX20180427-5959
+)
+
+# rtl88x2bu
+
 Updated driver for rtl88x2bu wifi adaptors based on rtl88x2BU_WiFi_linux_v5.2.4.4_26334.20180126_COEX20171012-5044.
 
 Build confirmed on `Linux version 4.16.0-2-amd64 (debian-kernel@lists.debian.org) (gcc version 7.3.0 (Debian 7.3.0-19)) #1 SMP Debian 4.16.12-1 (2018-05-27)`
